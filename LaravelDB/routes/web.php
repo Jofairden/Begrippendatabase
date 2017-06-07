@@ -13,6 +13,7 @@
 
 Route::get('/', 'TermController@index');
 Route::get('/terms/', 'TermController@index');
+//Route::get('terms')
 Route::get('/term/{term}', 'TermController@show');
 Route::get('/terms/fsthalf', 'TermController@fsthalf');
 Route::get('/terms/lsthalf', 'TermController@lsthalf');

@@ -8,8 +8,9 @@ class TermController extends Controller
 {
 	public function index()
 	{
-		$terms = Term::paginate(5);
+		$terms = Term::paginate(6);
 		return view('terms.index', compact('terms'));
+
 	}
 
 	public function show(Term $term)
@@ -20,13 +21,13 @@ class TermController extends Controller
 
 	public function fsthalf()
 	{
-		$terms = Term::Fsthalf()->paginate(5);
+		$terms = Term::Fsthalf()->paginate(6);
 		return view('terms.index', compact('terms'));
 	}
 
 	public function lsthalf()
 	{
-		$terms = Term::Lsthalf()->paginate(5);
+		$terms = Term::Lsthalf()->paginate(6);
 		return view('terms.index', compact('terms'));
 	}
 
@@ -50,7 +51,7 @@ class TermController extends Controller
 		//        $term->save();
 
 		$this->validate(request(), [
-			'title' => 'required|min:2|max:55',
+			'name' => 'required|min:2|max:55',
 			'description' => 'required|max:555'
 		]);
 
