@@ -19,7 +19,7 @@ $brand-danger: #bf5329;
 // Typography
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: 14px;
+$font-size-base: 1rem;
 $line-height-base: 1.6;
 $text-color: #636b6f;
 
@@ -36,3 +36,8 @@ $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
 $panel-default-heading-bg: #fff;
+
+// Colors
+$nhl-text-color: #5a5a5a;
+$nhl-secondary: #c83575;
+$nhl-primary: #f0f0f0;
