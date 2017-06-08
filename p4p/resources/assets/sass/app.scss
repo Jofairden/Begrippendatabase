@@ -1,9 +1,55 @@
-
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600|Open+Sans|Roboto);
 
 // Variables
 @import "variables";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap";
+
+html
+{
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after
+{
+  box-sizing: inherit;
+}
+
+body
+{
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  color: $nhl-text-color;
+  font-family:  'Raleway', 'sans-serif';
+  font-size: 14px;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+  color: $nhl-text-color;
+  font-family: 'Roboto', 'sans-serif';
+  font-size: 28px;
+}
+
+footer
+{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: $nhl-primary;
+  text-align: center;
+}
+
+.navbar
+{
+  background-color: $nhl-primary;
+}

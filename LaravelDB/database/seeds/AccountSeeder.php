@@ -6,6 +6,7 @@ class AccountSeeder extends Seeder
 {
 	public function run()
 	{
+		App\User::truncate();
 		// Gen simple account
 		App\User::create([
 			'name' => 'admin',

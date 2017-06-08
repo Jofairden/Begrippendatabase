@@ -44,15 +44,18 @@
         {{ $terms->links() }}
     </div>
     <div class="terms-container">
-        @foreach($terms as $term)
-            <div class="term">
-                <h4><a href="/term/{{$term->id}}">{{ $term->name }}</a></h4>
-                <p>On {{$term->created_at}}</p>
-                <span>
-                    {{ $term->description }}
-                </span>
+        @foreach(array_chunk($terms->all(), 3) as $row)
+            <div class="row">
+                @foreach($row as $term)
+                    <div class="term col-md-4">
+                        <h4><a href="/term/{{$term->id}}">{{ $term->name }}</a></h4>
+                        <p>On {{$term->created_at}}</p>
+                        <span>
+                            {{ $term->description }}
+                        </span>
+                    </div>
+                @endforeach
             </div>
-            <hr>
         @endforeach
     </div>
     <div class="paginator">
