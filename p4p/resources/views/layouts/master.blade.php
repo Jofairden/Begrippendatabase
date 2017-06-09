@@ -29,7 +29,7 @@
             <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href=" {{ url('/list') }}">Begrippen</a>
+            <a class="nav-link" href=" {{ url('/concepts') }}">Begrippen</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="{{ url('/') }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,8 +47,8 @@
             @endif
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <form class="form-inline my-2 my-lg-0" action="{{url('/search')}}" method="get">
+          <input class="form-control mr-sm-2" type="text" placeholder="Begrip naam..." id="q" name="q">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken</button>
         </form>
       </div>
@@ -62,7 +62,7 @@
     <footer>
         <p>
             &copy; Biologische begrippen databank - 2017 (Een service van het Biologielokaal van de
-            stichting De Digitale School, ontwikkeld door Dani&euml;l Zondervan, Max Antonissen en Jesse van der Bijl)
+            stichting De Digitale School
         </p>
     </footer>
 

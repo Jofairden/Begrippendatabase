@@ -20,6 +20,6 @@ mix.js([
     'node_modules/jquery/dist/jquery.min.js',
     'node_modules/bootstrap/dist/js/bootstrap.js',
     'resources/assets/js/app.js'
-], 'public/js/app.js')
+],  'public/js/app.js')
     .sass('resources/assets/sass/app.scss', 'public/css/app.css');
 
