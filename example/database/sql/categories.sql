@@ -1,8 +1,8 @@
 /*
--- Query: SELECT * FROM sourcedb.category
+-- Query: SELECT id,name FROM laraveldb.categories
 LIMIT 0, 1000
 
--- Date: 2017-06-09 16:33
+-- Date: 2017-06-10 19:30
 */
 INSERT INTO `categories` (`id`,`name`) VALUES (2,'Gedrag');
 INSERT INTO `categories` (`id`,`name`) VALUES (3,'Ecologie');
@@ -26,8 +26,8 @@ INSERT INTO `categories` (`id`,`name`) VALUES (20,'Gezondheid en ziekte');
 INSERT INTO `categories` (`id`,`name`) VALUES (21,'Planten (bouw en werking)');
 INSERT INTO `categories` (`id`,`name`) VALUES (22,'Gewervelden (algemeen)');
 INSERT INTO `categories` (`id`,`name`) VALUES (23,'Zintuigen');
-INSERT INTO `categories` (`id`,`name`) VALUES (26,'Ongewervelden (algemeen)');
 INSERT INTO `categories` (`id`,`name`) VALUES (25,'Scheikunde bij biologie');
+INSERT INTO `categories` (`id`,`name`) VALUES (26,'Ongewervelden (algemeen)');
 INSERT INTO `categories` (`id`,`name`) VALUES (27,'Schimmels en paddenstoelen (algemeen)');
 INSERT INTO `categories` (`id`,`name`) VALUES (28,'Bacterien,  virussen en eencelligen');
 INSERT INTO `categories` (`id`,`name`) VALUES (29,'Bloed, bloedsomloop en lymfevatenstelsel');
