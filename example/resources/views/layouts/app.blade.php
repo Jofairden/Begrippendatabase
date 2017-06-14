@@ -64,7 +64,7 @@
     </div>
 
     <footer>
-        <p>
+        <p class="mb-0">
             &copy; Biologische begrippen databank - 2017 (Een service van het Biologielokaal van de
             stichting De Digitale School
         </p>
