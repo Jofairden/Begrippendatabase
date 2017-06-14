@@ -9,15 +9,24 @@
 
     <div id="collapse{{$concept->id}}" class="collapse" role="tabpanel" aria-labelledby="heading{{$concept->id}}">
         <div class="card-block">
-            {!!html_entity_decode($concept->info)!!}
+            <div class="col-sm-12 col-md-8 col-lg-6 p-0">
+                <p class="p-0 m-0">
+                    {!!html_entity_decode($concept->info)!!}
+                </p>
+            </div>
+
             @if ($concept->categories->count() > 0)
                 <hr>
                 <h4>Categorieën</h4>
-                <div class="card">
-                    <div class="card-block">
-                        @foreach($concept->categories as $category)
-                            <p class="mb-0"><a href="{{route('categories.show', $category->id)}}">{{$category->name}}</a></p>
-                        @endforeach
+                <div class="col-xs-12 col-sm-4 p-0">
+                    <div class="card">
+                        <div class="card-block">
+                            @foreach($concept->categories as $category)
+                                <a href="{{route('categories.show', $category->id)}}">
+                                    <span class="badge badge-primary">{{$category->name}}</span>
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             @endif

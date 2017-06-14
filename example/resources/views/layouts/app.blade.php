@@ -21,7 +21,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                {{ config('app.name', 'Biobegrippen') }}
             </a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">

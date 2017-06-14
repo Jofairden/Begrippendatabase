@@ -22,6 +22,11 @@ class Category extends Model
 		return $this->belongsToMany(Concept::class);
 	}
 
+	public function educations()
+	{
+		return $this->belongsToMany(Education::class);
+	}
+
 	public function relationCount()
 	{
 //		return \DB::table('category_concept')

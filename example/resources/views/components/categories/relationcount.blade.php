@@ -1,5 +1,6 @@
 <p>
-    Bevat {{$category->concepts->count()}} begrippen,
+    Bevat <b>{{$category->concepts->count()}}</b> begrippen,
     waarvan
-    {{\App\Category::multiRelationCount($category)}} ook behoren tot andere categorieën
+    <b>{{\App\Category::multiRelationCount($category)}}</b>
+    ook behoren tot andere categorieën
 </p>

@@ -44,6 +44,7 @@
         @component('components.categories.category')
             @slot('category', $category)
         @endcomponent
+        <hr>
     @endforeach
 
 @endsection

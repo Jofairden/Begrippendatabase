@@ -1,5 +1,8 @@
-<h1><a href="{{url('/categories/' . $category->id)}}">{{$category->name}}</a></h1>
+@component('components.categories.categoryTitle')
+    @slot('category', $category)
+    @slot('withLink', true)
+    @slot('withRelations', true)
+@endcomponent
 @component('components.categories.relationcount')
     @slot('category', $category)
 @endcomponent
-<hr>

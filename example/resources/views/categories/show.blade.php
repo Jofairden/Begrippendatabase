@@ -2,7 +2,10 @@
 @section('title', $category->name)
 
 @section('content')
-    <h1>{{$category->name}}</h1>
+    @component('components.categories.categoryTitle')
+        @slot('category', $category)
+        @slot('withRelations', true)
+    @endcomponent
     @component('components.categories.relationcount')
         @slot('category', $category)
     @endcomponent
