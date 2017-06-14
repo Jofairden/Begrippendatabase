@@ -33,6 +33,9 @@
                         <a class="nav-link" href="{{route('categories.index')}}">Categorieën</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{route('educations.index')}}">Onderwijsniveaus</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{route('api.index')}}">API</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -52,11 +55,6 @@
                         </div>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" method="get" action="{{route('concepts.search')}}">
-                    {{ csrf_field() }}
-                    <input class="form-control mr-sm-2" type="text" id="q" name="q">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken</button>
-                </form>
             </div>
         </div>
     </nav>

@@ -33,8 +33,15 @@ Route::prefix('categories')
 			->get('/{category}', 'CategoryController@show');
 	});
 
-Route::get('/search', 'ConceptController@search')
-	->name('concepts.search');
+Route::prefix('educations')
+	->group(function ()
+	{
+		Route::name('educations.index')
+			->get('/', 'EducationController@index');
+
+		Route::name('educations.show')
+			->get('/{education}', 'EducationController@show');
+	});
 
 Auth::routes();
 

@@ -2,13 +2,10 @@
 
 namespace App;
 
-use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Concept extends Model
 {
-	use Searchable;
-
 	public function scopeByName($query, $order = "ASC")
 	{
 		return $query->orderBy('name', $order);

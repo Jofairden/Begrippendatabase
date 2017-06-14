@@ -41,11 +41,9 @@
     @yield('info')
 
     @foreach($categories as $category)
-        <h1><a href="{{url('/categories/' . $category->id)}}">{{$category->name}}</a></h1>
-        @component('components.categories.relationcount')
+        @component('components.categories.category')
             @slot('category', $category)
         @endcomponent
-        <hr>
     @endforeach
 
 @endsection

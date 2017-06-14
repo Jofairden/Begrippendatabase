@@ -16,7 +16,6 @@ class CategoryController extends Controller
 		if ($sort == "desc")
 		{
 			$categories = Category::byName("DESC");
-
 		}
 		else if ($sort == "most")
 		{
