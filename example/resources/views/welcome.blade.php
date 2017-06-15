@@ -30,10 +30,10 @@
     @endcomponent
     <div class="ajaxStats">
         Resultaat
-        <span class="ajaxStats-first">{{ $concepts->firstItem() }}</span>
-        - <span class="ajaxStats-last">{{ $concepts->lastItem() }}</span>
-        van <span class="ajaxStats-total">{{ $concepts->total() }}</span>
-        begrippen (pagina <span class="ajaxStats-page">{{ $concepts->currentPage() }}</span>)
+        <span class="ajaxStats-first">{{ $concepts->firstItem() || 0 }}</span>
+        - <span class="ajaxStats-last">{{ $concepts->lastItem() || 0 }}</span>
+        van <span class="ajaxStats-total">{{ $concepts->total() || 0 }}</span>
+        begrippen (pagina <span class="ajaxStats-page">{{ $concepts->currentPage() || 1 }}</span>)
     </div>
     <hr>
     <hr>
@@ -83,10 +83,10 @@
                 },
             }).done(function (data) {
                 $('.ajaxHolder').html(data.html);
-                $('.ajaxStats-first').html(data.from);
-                $('.ajaxStats-last').html(data.to);
-                $('.ajaxStats-total').html(data.total);
-                $('.ajaxStats-page').html(data.current_page);
+                $('.ajaxStats-first').html(data.from || 0);
+                $('.ajaxStats-last').html(data.to || 0);
+                $('.ajaxStats-total').html(data.total || 0);
+                $('.ajaxStats-page').html(data.current_page || 1);
                 location.hash = hash;
             }).fail(function () {
                 console.log("concepts could not be loaded through ajax");
