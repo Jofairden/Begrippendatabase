@@ -3,7 +3,9 @@
 
 @section('info')
     <p>
-        Resultaat {{$categories->count()}} categorieën
+        <?php $catCount = $categories->count(); ?>
+        Resultaat {{$catCount}}
+        @if($catCount > 1) categorieën @else categorie @endif
     </p>
 @endsection
 

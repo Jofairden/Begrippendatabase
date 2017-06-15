@@ -22,9 +22,7 @@
                     <div class="card">
                         <div class="card-block">
                             @foreach($concept->categories as $category)
-                                <a href="{{route('categories.show', $category->id)}}">
-                                    <span class="badge badge-primary">{{$category->name}}</span>
-                                </a>
+                                <a href="{{route('categories.show', $category->id)}}"><span class="badge badge-primary">{{$category->name}}</span></a>
                             @endforeach
                         </div>
                     </div>

@@ -1,42 +1,55 @@
 @extends('layouts.app')
-@section('title', 'Concepts')
+@section('title', 'Alle begrippen')
+
+@section('styles')
+    <style>
+        .pagination
+        {
+            margin-bottom: 0;
+        }
+
+        #accordion
+        {
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+
+        #accordion>.card
+        {
+            margin-bottom: 1em;
+        }
+
+        #accordion>.card:last-child
+        {
+            margin: 0;
+        }
+    </style>
+@endsection
 
 @section('info')
     <p>
-        Resultaat {{$concepts->firstItem()}} - {{$concepts->firstItem() + $concepts->count() - 1}}
-        van {{\App\Concept::all()->count()}} begrippen
+        @if($concepts->count() >= 1)
+            Resultaat {{$concepts->firstItem()}} - {{$concepts->firstItem() + $concepts->count() - 1}}
+            van {{\App\Concept::all()->count()}} begrippen
+        @else
+            Geen resultaat
+        @endif
     </p>
-@endsection
-
-@section('query')
-    <form method="get" action="{{route('concepts.index')}}" class="form-inline">
-        <div class="form-group">
-            <input class="hidden" type="hidden" class="form-control" id="sort" name="sort" value="@if(isset($_GET['sort'])){{strip_tags($_GET['sort'])}}@endif" disabled>
-        </div>
-
-        <div class="form-group">
-            <input type="text" class="form-control" id="query" name="query" value="@if(isset($_GET['query'])){{strip_tags($_GET['query'])}}@endif">
-        </div>
-
-        <button type="submit" class="btn btn-primary mx-sm-3">Zoek</button>
-    </form>
-@endsection
-
-@section('sort')
-    <h3>
-        Sorteren
-    </h3>
-    <ul class="sort-list mb-0">
-        <li class="sort-opt"><a href="{{url('/concepts/?sort=asc')}}@if(isset($_GET['query']))&query={{$_GET['query']}}@endif">Oplopend alfabet</a></li>
-        <li class="sort-opt"><a href="{{url('/concepts/?sort=desc' )}}@if(isset($_GET['query']))&query={{$_GET['query']}}@endif">Aflopend alfabet</a></li>
-    </ul>
-    <hr>
 @endsection
 
 @section('content')
 
-    @yield('sort')
-    @yield('query')
+    @component('components.concepts.sort',
+        ['withTitle' => true,
+        'withHr' => true])
+    @endcomponent
+
+    @component('components.concepts.searchbar',
+        ['inline' => true,
+        'withSubmit' => true,
+        'submitText' => 'Alle begrippen doorzoeken'])
+    @endcomponent
+
     @yield('info')
     {{$concepts->links('vendor.pagination.bootstrap-4')}}
 
@@ -45,11 +58,36 @@
             @component('components.accordioncard-concept')
                 @slot('concept', $concept)
             @endcomponent
-            <br>
         @endforeach
     @endcomponent
 
     {{$concepts->links('vendor.pagination.bootstrap-4')}}
     @yield('info')
 
+@endsection
+
+@section('scripts')
+    <script>
+        $("#query").on("keyup", function() {
+            let value = $(this).val();
+
+            $(".card").each(function(index) {
+                if (index >= 0)
+                {
+                    let text = $(this).find(".card-header:first").text().trim();
+                    if (text !== "")
+                    {
+                        if (text.indexOf(value) >= 0)
+                        {
+                            $(this).show();
+                        }
+                        else
+                        {
+                            $(this).hide();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

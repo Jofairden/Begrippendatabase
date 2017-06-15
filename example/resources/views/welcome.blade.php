@@ -2,5 +2,13 @@
 @section('title', 'Welkom')
 
 @section('content')
-    <h1>Welkom</h1>
+    <hr>
+    <hr>
+    <h1>Zoek naar begrippen</h1>
+    @component('components.concepts.searchbar',
+    [ 'withSubmit' => true])
+    @endcomponent
+
+    <hr>
+    <hr>
 @endsection

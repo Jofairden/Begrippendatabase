@@ -24,14 +24,15 @@
         </div>
 
         <p>
-            Bevat <b>{{$education->categories->count()}}</b> categorieën
+            <?php $catCount = $education->categories->count(); ?>
+            Bevat <b>{{$catCount}}</b> @if($catCount > 1) categorieën @else categorie @endif
             met in totaal
-            <?php $total = 0; ?>
+            <?php $conCount = 0; ?>
             @foreach($education->categories as $category)
-                <?php $total += $category->concepts->count(); ?>
+                <?php $conCount += $category->concepts->count(); ?>
             @endforeach
-            <b>{{$total}}</b>
-            begrippen
+            <b>{{$conCount}}</b>
+            @if($conCount > 1) begrippen @else begrip @endif
         </p>
         <hr>
     @endforeach
