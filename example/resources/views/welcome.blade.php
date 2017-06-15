@@ -41,6 +41,7 @@
 
 @section('scripts')
     <script>
+        // deal with window hash
         $(window).on('hashchange', function() {
             if (window.location.hash) {
                 let page = window.location.hash.replace('#', '');
@@ -48,11 +49,11 @@
                 if (page === Number.NaN || page <= 0)
                     return false;
                 else
-                    getConcepts(page);
-
+                    getConcepts(page, $("#query").val());
             }
         });
 
+        // override for pagination urls
         $(document).ready(function() {
             $(document).on('click', '.pagination a', function (e) {
                 let url = $(this).attr('href');
@@ -61,6 +62,7 @@
             });
         });
 
+        // ajax function to get concepts
         function getConcepts(page, query) {
             let url = '{{route('concepts.ajax.request')}}' + '?page=' + page;
             let hash = page;
@@ -81,19 +83,24 @@
             });
         }
 
-        $("#query").on("keyup", function() {
-            let value = $(this).val();
-            let page = 1;
-            if (window.location.hash) {
-                let possiblePage = window.location.hash.replace('#', '');
-                if (possiblePage !== Number.NaN
-                    && possiblePage > 0)
-                {
-                    page = possiblePage;
-                }
-            }
-            getConcepts(page, value);
+        // Delay helper
+        let delay = (function(){
+            let timer = 0;
+            return function(callback, ms){
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+
+        // Allows for a small delay before getting concepts when searching
+        // This to minimize the network load
+        // The ajax request will fire 200ms after the user stops giving input
+        $("#query").on("input", function () {
+            delay(function () {
+                getConcepts(1, $("#query").val());
+            }, 200);
         });
+
 
     </script>
 @endsection
