@@ -43,12 +43,19 @@ class ConceptController extends Controller
 		{
 			$query = $request->input('query');
 			$concepts = Concept::where('name', 'like', '%' . $query . '%')->paginate(15);
-		}
-		else
+		} else {
 			$concepts = Concept::paginate(15);
+		}
 
-		if ($request->ajax())
-			return response()->json(view('components.concepts.ajax', compact('concepts'))->render());
+		if ($request->ajax()) {
+			return response()->json([
+				'current_page' => $concepts->currentPage(),
+				'total' => $concepts->total(),
+				'from' => $concepts->firstItem(),
+				'to' => $concepts->lastItem(),
+				'html' =>  view('components.concepts.ajax', compact('concepts'))->render(),
+			]);
+		}
 
 		return view('welcome', compact('concepts'));
 	}

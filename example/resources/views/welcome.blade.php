@@ -28,7 +28,13 @@
     <h1>Zoek naar begrippen</h1>
     @component('components.concepts.searchbar')
     @endcomponent
-
+    <div class="ajaxStats">
+        Resultaat
+        <span class="ajaxStats-first">{{ $concepts->firstItem() }}</span>
+        - <span class="ajaxStats-last">{{ $concepts->lastItem() }}</span>
+        van <span class="ajaxStats-total">{{ $concepts->total() }}</span>
+        begrippen (pagina <span class="ajaxStats-page">{{ $concepts->currentPage() }}</span>)
+    </div>
     <hr>
     <hr>
 
@@ -76,13 +82,16 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             }).done(function (data) {
-                $('.ajaxHolder').html(data);
+                $('.ajaxHolder').html(data.html);
+                $('.ajaxStats-first').html(data.from);
+                $('.ajaxStats-last').html(data.to);
+                $('.ajaxStats-total').html(data.total);
+                $('.ajaxStats-page').html(data.current_page);
                 location.hash = hash;
             }).fail(function () {
                 console.log("concepts could not be loaded through ajax");
             });
         }
-
         // Delay helper
         let delay = (function(){
             let timer = 0;
