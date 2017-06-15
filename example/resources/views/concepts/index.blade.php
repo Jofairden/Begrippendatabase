@@ -1,31 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Alle begrippen')
 
-@section('styles')
-    <style>
-        .pagination
-        {
-            margin-bottom: 0;
-        }
-
-        #accordion
-        {
-            margin-top: 1em;
-            margin-bottom: 1em;
-        }
-
-        #accordion>.card
-        {
-            margin-bottom: 1em;
-        }
-
-        #accordion>.card:last-child
-        {
-            margin: 0;
-        }
-    </style>
-@endsection
-
 @section('info')
     <p>
         @if($concepts->count() >= 1)

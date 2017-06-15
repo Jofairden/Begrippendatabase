@@ -37,6 +37,19 @@ class ConceptController extends Controller
 		return view('concepts.show', compact('concept'));
 	}
 
+	public function ajax(Request $request)
+	{
+		if ($request->ajax())
+		{
+			$text = $request->input('query');
+			if (isset($text))
+			{
+				return Concept::where('name', 'like', '%' . $text . '%')->get();
+			}
+		}
+		return [];
+	}
+
 	//public function search(Request $request)
 	//{
 	//	// First we define the error message we are going to show if no keywords

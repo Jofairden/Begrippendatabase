@@ -23,6 +23,9 @@ Route::get('/concepts', 'ConceptController@index')
 
 Route::get('/concepts/{concept}', 'ConceptController@show');
 
+Route::name('concepts.ajax')
+	->post('/concepts/ajax', 'ConceptController@ajax');
+
 Route::prefix('categories')
 	->group(function ()
 	{
