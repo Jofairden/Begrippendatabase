@@ -3,12 +3,6 @@
 
 @section('styles')
     <style>
-        #accordion
-        {
-            height: calc(60vh);
-            overflow-y: scroll;
-        }
-
         @media (max-width: 978px) {
             .container {
                 padding:0;
@@ -38,48 +32,68 @@
     <hr>
     <hr>
 
-    @component('components.accordion')
-    @endcomponent
+    <div class="ajaxHolder">
+        @include('components.concepts.ajax',
+        ['concepts ' => $concepts])
+    </div>
+
 @endsection
 
 @section('scripts')
     <script>
-        $("#query").on("keyup", function() {
-            let value = $(this).val();
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                let page = window.location.hash.replace('#', '');
+
+                if (page === Number.NaN || page <= 0)
+                    return false;
+                else
+                    getConcepts(page);
+
+            }
+        });
+
+        $(document).ready(function() {
+            $(document).on('click', '.pagination a', function (e) {
+                let url = $(this).attr('href');
+                getConcepts(url.split('page=')[1], url.split('query=')[1]);
+                e.preventDefault();
+            });
+        });
+
+        function getConcepts(page, query) {
+            let url = '{{route('concepts.ajax.request')}}' + '?page=' + page;
+            let hash = page;
+            if (query && query.trim().length > 0) {
+                url += '&query=' + query;
+            }
             $.ajax({
-                url: '{{route('concepts.ajax')}}',
+                url : url,
+                dataType: 'json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'POST',
-                data: {query:value},
-                dataType: 'JSON',
-                success: function (data) {
-                    console.log(data);
-                    $('#accordion').empty();
-                    $.each(data, function()
-                    {
-                        $('#accordion').append(
-                            '<div class="card">' +
-                                '<div id="heading' + this.id + '" class="card-header" role="tab">' +
-                                    '<h5 class="mb-0">' +
-                                        '<a data-toggle="collapse" data-parent="#accordion" href="#collapse' + this.id +'" aria-expanded="true" aria-controls="collapse' + this.id + '">'+this.name+'</a>' +
-                                    '</h5>' +
-                                '</div>' +
-                                '<div id="collapse'+this.id+'" class="collapse" role="tabpanel" aria-labelledby="heading'+this.id+'">' +
-                                    '<div class="card-block">' +
-                                        '<div class="col-sm-12 col-md-8 col-lg-6 p-0">' +
-                                            '<p class="p-0 m-0">' + this.info + '</p>' +
-                                        '</div>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>')
-                    });
-                },
-                error:function(){
-                    console.log("An error has occured !");
-                }
+            }).done(function (data) {
+                $('.ajaxHolder').html(data);
+                location.hash = hash;
+            }).fail(function () {
+                console.log("concepts could not be loaded through ajax");
             });
+        }
+
+        $("#query").on("keyup", function() {
+            let value = $(this).val();
+            let page = 1;
+            if (window.location.hash) {
+                let possiblePage = window.location.hash.replace('#', '');
+                if (possiblePage !== Number.NaN
+                    && possiblePage > 0)
+                {
+                    page = possiblePage;
+                }
+            }
+            getConcepts(page, value);
         });
+
     </script>
 @endsection

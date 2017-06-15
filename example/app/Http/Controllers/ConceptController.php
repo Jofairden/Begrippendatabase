@@ -39,37 +39,17 @@ class ConceptController extends Controller
 
 	public function ajax(Request $request)
 	{
-		if ($request->ajax())
+		if ($request->has('query'))
 		{
-			$text = $request->input('query');
-			if (isset($text))
-			{
-				return Concept::where('name', 'like', '%' . $text . '%')->get();
-			}
+			$query = $request->input('query');
+			$concepts = Concept::where('name', 'like', '%' . $query . '%')->paginate(15);
 		}
-		return [];
-	}
+		else
+			$concepts = Concept::paginate(15);
 
-	//public function search(Request $request)
-	//{
-	//	// First we define the error message we are going to show if no keywords
-	//	// existed or if no results found.
-	//	$error = ['error' => 'No results found, please try with different keywords.'];
-	//
-	//	// Making sure the user entered a keyword.
-	//	if($request->has('q')) {
-	//
-	//		// Using the Laravel Scout syntax to search the products table.
-	//		$concepts = Concept::search($request->get('q'))->orderBy('name')->paginate(15);
-	//
-	//		// If there are results return them, if none, return the error message.
-	//		return $concepts->count()
-	//			? view('concepts.index', compact('concepts'))
-	//			: $error;
-	//
-	//	}
-	//
-	//	// Return the error message if no keywords existed
-	//	return $error;
-	//}
+		if ($request->ajax())
+			return response()->json(view('components.concepts.ajax', compact('concepts'))->render());
+
+		return view('welcome', compact('concepts'));
+	}
 }

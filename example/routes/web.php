@@ -14,8 +14,9 @@
 // API routes
 include('web/api.php');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::name('welcome')
+	->get('/', function () {
+    return view('welcome', ["concepts" => \App\Concept::paginate(15)]);
 });
 
 Route::get('/concepts', 'ConceptController@index')
@@ -23,8 +24,9 @@ Route::get('/concepts', 'ConceptController@index')
 
 Route::get('/concepts/{concept}', 'ConceptController@show');
 
-Route::name('concepts.ajax')
-	->post('/concepts/ajax', 'ConceptController@ajax');
+Route::name('concepts.ajax.request')
+	->get('/concepts/ajax/request', 'ConceptController@ajax');
+
 
 Route::prefix('categories')
 	->group(function ()
