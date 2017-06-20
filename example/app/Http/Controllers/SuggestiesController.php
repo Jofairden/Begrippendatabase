@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use DB;
+use Mail;
 use App\Suggestion;
 use App\Concept;
-use DB;
+use App\Mail\Denied;
+use Illuminate\Http\Request;
 
 class SuggestiesController extends Controller
 {
@@ -24,12 +26,14 @@ class SuggestiesController extends Controller
             $suggestion->categories = $categoryNames;
         }
         return view('suggestions.index', compact('suggestions'));
-    }
+    } 
 
     public function post(Request $request) { 
         if($request->ajax()) {
             $suggestion = Suggestion::where('id', '=', $request->input('id'))->first();
-            
+
+            $viewSuggestion = action('ConceptController@index', ["query" => $suggestion->name]);
+        
             $concept = new Concept();
             $concept->name = $suggestion->name;
             $concept->info = $suggestion->info;
@@ -38,17 +42,27 @@ class SuggestiesController extends Controller
 
             $categoryIDs = explode(",", str_replace(' ', '', $suggestion->categories));
             $concept->categories()->attach($categoryIDs);
+
+            Mail::send('emails.accepted', compact('viewSuggestion'), function($message) use($suggestion) {
+                $message->from("pbb@digischool.nl", "Steef Steneken");
+                $message->to($suggestion->email);
+            });
+
+            $suggestion->delete();
         }
+    }
+
+    public function edit($id) { 
+        
     }
 
     public function delete(Request $request) { 
         if($request->ajax()) {
-            Suggestion::Where('id', '=', $request->input('id'))->first()->delete();
-            return response()->json([
-                'Methode' => 'Delete',
-                'Drerrie' => 'VDB', 
-                'ID' => $request->input('id')
-            ]);
+            $suggestion = Suggestion::Where('id', '=', $request->input('id'))->first();
+            
+            Mail::to($suggestion->email)->send(new Denied($request->input('reason')));
+            
+            $suggestion->delete();
         }
     }
 

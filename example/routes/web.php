@@ -51,6 +51,7 @@ Route::prefix('educations')
 
 Route::get('/suggesties', 'SuggestiesController@index');
 Route::post('/suggesties', 'SuggestiesController@post');
+Route::get('/suggesties/{id}', 'SuggestiesController@edit');
 Route::delete('/suggesties', 'SuggestiesController@delete');
 
 Route::get('/toevoegen', 'ToevoegenController@index');

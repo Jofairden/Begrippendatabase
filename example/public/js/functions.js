@@ -1,4 +1,5 @@
 $('document').ready(function(){
+    var id = null;
 
     $(".btn-success").click(function(){
         var id = $(this).closest("tr").attr('id');
@@ -14,12 +15,16 @@ $('document').ready(function(){
         });
     });
 
-     $(".btn-danger").click(function(){
-        var id = $(this).closest("tr").attr('id');
+    $(".btn-danger.open").click(function(){
+        id = $(this).closest("tr").attr("id");
+    });
+
+     $(".btn-danger.remove").click(function(){
+        var reason = $("#reason").val();
         $.ajax({
             url: window.location.href,
             type: 'DELETE',
-            data: { '_token' : window.Laravel.csrfToken, 'id' : id },
+            data: { '_token' : window.Laravel.csrfToken, 'id' : id, 'reason' : reason },
             success: function(response) { 
                 var tr = "tr#" + id;
                 $(tr).fadeOut(500);
