@@ -13,11 +13,10 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
 	    $faker = \Faker\Factory::create();
-	    factory(App\User::class,      10)->create();
-	    factory(App\Concept::class,  100)->create();
-	    factory(App\Category::class,  25)->create();
-	    factory(App\Education::class,   10)->create();
-
+	    factory(App\User::class,         10)->create();
+	    factory(App\Concept::class,     100)->create();
+	    factory(App\Category::class,     25)->create();
+	    factory(App\Education::class,    10)->create();
 	    $concepts = \App\Concept::all();
 	    $categories = \App\Category::all();
 	    $cat_ids    = $categories->pluck('id')->all();
@@ -56,5 +55,14 @@ class DatabaseSeeder extends Seeder
 			    array_push($used, $rnd_id);
 		    }
 	    }
+
+	    DB::table('permissions')->insert(
+		    array(
+			    array('name' => 'create', 'info' => 'Maak een begrip aan.'),
+			    array('name' => 'edit', 'info' => 'Pas een begrip aan.'),
+			    array('name' => 'delete', 'info' => 'Verwijder een begrip'),
+			    array('name' => 'master', 'info' => 'Alle permissies.'),
+			    array('name' => 'admin', 'info' => 'Administrator.'),
+		    ));
     }
 }

@@ -50,3 +50,10 @@ Route::prefix('educations')
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('permissions')
+	->group(function()
+	{
+		Route::name('permissions.index')
+			->get('/', 'PermissionController@index');
+	});

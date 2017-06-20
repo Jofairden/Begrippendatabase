@@ -55,7 +55,7 @@
                 if (page === Number.NaN || page <= 0)
                     return false;
                 else
-                    getConcepts(page, $("#query").val());
+                    getConcepts(page, $("#query").val(), $("input:radio[id^='sortName']:checked").attr('id'));
             }
         });
 
@@ -63,18 +63,20 @@
         $(document).ready(function() {
             $(document).on('click', '.pagination a', function (e) {
                 let url = $(this).attr('href');
-                getConcepts(url.split('page=')[1], url.split('query=')[1]);
+                getConcepts(url.split('page=')[1], url.split('query=')[1], url.split('sort=')[1]);
                 e.preventDefault();
             });
         });
 
         // ajax function to get concepts
-        function getConcepts(page, query) {
+        function getConcepts(page, query, sort) {
             let url = '{{route('concepts.ajax.request')}}' + '?page=' + page;
             let hash = page;
-            if (query && query.trim().length > 0) {
+            if (query && query.trim().length > 0)
                 url += '&query=' + query;
-            }
+            if (sort && sort.trim().length > 0)
+                url += '&sort=' + sort;
+
             $.ajax({
                 url : url,
                 dataType: 'json',
@@ -106,10 +108,13 @@
         // The ajax request will fire 200ms after the user stops giving input
         $("#query").on("input", function () {
             delay(function () {
-                getConcepts(1, $("#query").val());
+                getConcepts(1, $("#query").val(), $("input:radio[id^='sortName']:checked").attr('id'));
             }, 200);
         });
 
-
+        // Allows for sorting
+        $(document).on('change', 'input:radio[id^="sortName"]', function (event) {
+            getConcepts(window.location.hash.substr(1) || 1, $("#query").val(), $("input:radio[id^='sortName']:checked").attr('id'));
+        });
     </script>
 @endsection

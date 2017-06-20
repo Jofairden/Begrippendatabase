@@ -15,8 +15,8 @@ class CreateConceptsTable extends Migration
     {
         Schema::create('concepts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('info')->nullable();
+            $table->string('name', 55)->unique();
+            $table->text('info', 555)->nullable();
             $table->timestamps();
         });
     }

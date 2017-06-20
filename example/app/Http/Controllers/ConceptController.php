@@ -39,13 +39,37 @@ class ConceptController extends Controller
 
 	public function ajax(Request $request)
 	{
+		$concepts = null;
+
 		if ($request->has('query'))
 		{
 			$query = $request->input('query');
-			$concepts = Concept::where('name', 'like', '%' . $query . '%')->paginate(15);
-		} else {
-			$concepts = Concept::paginate(15);
+			$concepts = Concept::where('name', 'like', '%' . $query . '%');
 		}
+
+		if ($request->has('sort'))
+		{
+			$sort = $request->input('sort');
+			if ($sort == "sortNameASC")
+			{
+				if ($concepts === null)
+					$concepts = Concept::orderBy('name', 'ASC');
+				else
+					$concepts = $concepts->orderBy('name', 'ASC');
+			}
+			else if ($sort == "sortNameDESC")
+			{
+				if ($concepts === null)
+					$concepts = Concept::orderBy('name', 'DESC');
+				else
+					$concepts = $concepts->orderBy('name', 'DESC');
+			}
+		}
+
+		if ($concepts === null)
+			$concepts = Concept::paginate(15);
+		else
+			$concepts = $concepts->paginate(15);
 
 		if ($request->ajax()) {
 			return response()->json([
