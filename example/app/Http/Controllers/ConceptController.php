@@ -37,26 +37,50 @@ class ConceptController extends Controller
 		return view('concepts.show', compact('concept'));
 	}
 
-	//public function search(Request $request)
-	//{
-	//	// First we define the error message we are going to show if no keywords
-	//	// existed or if no results found.
-	//	$error = ['error' => 'No results found, please try with different keywords.'];
-	//
-	//	// Making sure the user entered a keyword.
-	//	if($request->has('q')) {
-	//
-	//		// Using the Laravel Scout syntax to search the products table.
-	//		$concepts = Concept::search($request->get('q'))->orderBy('name')->paginate(15);
-	//
-	//		// If there are results return them, if none, return the error message.
-	//		return $concepts->count()
-	//			? view('concepts.index', compact('concepts'))
-	//			: $error;
-	//
-	//	}
-	//
-	//	// Return the error message if no keywords existed
-	//	return $error;
-	//}
+	public function ajax(Request $request)
+	{
+		$concepts = null;
+
+		if ($request->has('query'))
+		{
+			$query = $request->input('query');
+			$concepts = Concept::where('name', 'like', '%' . $query . '%');
+		}
+
+		if ($request->has('sort'))
+		{
+			$sort = $request->input('sort');
+			if ($sort == "sortNameASC")
+			{
+				if ($concepts === null)
+					$concepts = Concept::orderBy('name', 'ASC');
+				else
+					$concepts = $concepts->orderBy('name', 'ASC');
+			}
+			else if ($sort == "sortNameDESC")
+			{
+				if ($concepts === null)
+					$concepts = Concept::orderBy('name', 'DESC');
+				else
+					$concepts = $concepts->orderBy('name', 'DESC');
+			}
+		}
+
+		if ($concepts === null)
+			$concepts = Concept::paginate(15);
+		else
+			$concepts = $concepts->paginate(15);
+
+		if ($request->ajax()) {
+			return response()->json([
+				'current_page' => $concepts->currentPage(),
+				'total' => $concepts->total(),
+				'from' => $concepts->firstItem(),
+				'to' => $concepts->lastItem(),
+				'html' =>  view('components.concepts.ajax', compact('concepts'))->render(),
+			]);
+		}
+
+		return view('welcome', compact('concepts'));
+	}
 }

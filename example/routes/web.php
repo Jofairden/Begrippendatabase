@@ -16,14 +16,18 @@ include('web/api.php');
 Auth::routes();
 
 
-Route::get('/', function () {
-    return view('welcome');
+Route::name('welcome')
+	->get('/', function () {
+    return view('welcome', ["concepts" => \App\Concept::paginate(15)]);
 });
 
 Route::get('/concepts', 'ConceptController@index')
 	->name('concepts.index');
 
 Route::get('/concepts/{concept}', 'ConceptController@show');
+
+Route::name('concepts.ajax.request')
+	->get('/concepts/ajax/request', 'ConceptController@ajax');
 
 Route::prefix('categories')
 	->group(function ()
@@ -52,4 +56,10 @@ Route::delete('/suggesties', 'SuggestiesController@delete');
 Route::get('/toevoegen', 'ToevoegenController@index');
 Route::post('/toevoegen', 'ToevoegenController@post');
 
-//Route::post('/toevoegen', 'ToevoegenController@post');
+Route::prefix('permissions')
+	->group(function()
+	{
+		Route::name('permissions.index')
+			->get('/', 'PermissionController@index');
+	});
+

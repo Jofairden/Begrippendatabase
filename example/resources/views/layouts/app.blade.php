@@ -16,6 +16,11 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script>
+        window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+    </script>
     @yield('styles')
 </head>
 <body>
@@ -63,14 +68,14 @@
         </div>
     </nav>
 
-    <div class="main-content container" id="app">
+
+    <div class="main-content container mb-5" id="app">
         @yield('content')
     </div>
 
     <footer>
         <p class="mb-0">
-            &copy; Biologische begrippen databank - 2017 (Een service van het Biologielokaal van de
-            stichting De Digitale School
+            &copy; Biologische begrippen databank - 2017 (Een service van het Biologielokaal van de stichting De Digitale School)
         </p>
     </footer>
 

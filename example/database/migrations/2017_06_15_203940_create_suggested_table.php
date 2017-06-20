@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEducationsTable extends Migration
+class CreateSuggestedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateEducationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('educations', function (Blueprint $table) {
+        Schema::create('suggested', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("name",55)->unique();
-            $table->text("info", 255)->nullable();
+            $table->string('name');
+            $table->text('info')->nullable();
+            $table->string('categories');
+            $table->string('email');
         });
     }
 
@@ -27,6 +29,6 @@ class CreateEducationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('educations');
+        Schema::dropIfExists('suggested');
     }
 }
