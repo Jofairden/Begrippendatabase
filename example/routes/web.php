@@ -13,6 +13,8 @@
 
 // API routes
 include('web/api.php');
+Auth::routes();
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,6 +45,11 @@ Route::prefix('educations')
 			->get('/{education}', 'EducationController@show');
 	});
 
-Auth::routes();
+Route::get('/suggesties', 'SuggestiesController@index');
+Route::post('/suggesties', 'SuggestiesController@post');
+Route::delete('/suggesties', 'SuggestiesController@delete');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/toevoegen', 'ToevoegenController@index');
+Route::post('/toevoegen', 'ToevoegenController@post');
+
+//Route::post('/toevoegen', 'ToevoegenController@post');

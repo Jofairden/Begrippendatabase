@@ -15,6 +15,10 @@ class Category extends Model
 		return $query->orderBy('id', $order);
 	}
 
+	public function scopeAttr($query) {
+		return $query->getAttributes();
+	 }
+
 	public function concepts()
 	{
 		return $this->belongsToMany(Concept::class);
@@ -39,5 +43,6 @@ class Category extends Model
 			->orderBy('concept_id')
 			->count();
 	}
+
 
 }
