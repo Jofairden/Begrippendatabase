@@ -14,10 +14,10 @@
     <form id="#sortForm">
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary @if($sortNameASC) active @endif" name="label_Sort" id="label_sortNameASC">
-                <input type="radio" name="sort" id="sortNameASC" autocomplete="off" @if($sortNameASC) checked @endif>Naam oplopend
+                <input type="radio" name="sort" id="sortNameASC" autocomplete="off" @if($sortNameASC) checked @endif>Oplopend
             </label>
             <label class="btn btn-primary @if($sortNameDESC) active @endif" name="label_Sort" id="label_sortNameDESC">
-                <input type="radio" name="sort" id="sortNameDESC" autocomplete="off" @if($sortNameDESC) checked @endif>Naam aflopend
+                <input type="radio" name="sort" id="sortNameDESC" autocomplete="off" @if($sortNameDESC) checked @endif>Aflopend
             </label>
         </div>
     </form>
