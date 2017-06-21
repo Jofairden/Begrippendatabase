@@ -1,3 +1,5 @@
+<?php $users = \App\User::all(); ?>
+<?php $permissions = \App\Permission::all(); ?>
 @foreach($users as $user)
 	<?php $userPerms = $user->permissions; ?>
 	<?php $userRevokedPerms = \App\Permission::revokedPermissions($user->id); ?>
@@ -9,14 +11,14 @@
                 @if($userPerms->count() > 0)
                     <div class="granted-perms-header">
                         @foreach($userPerms as $permission)
-                            <span class="badge badge-success badge-clickable badge-revokeable"><a href="">{{$permission->name}}</a></span>
+                            <span class="badge badge-success badge-clickable badge-revokeable"><a href="{{route('permissions.ajax.request')}}?user={{$user->id}}&perm={{$permission->id}}">{{$permission->name}}</a></span>
                         @endforeach
                     </div>
                 @endif
                 @if(count($userRevokedPerms) > 0)
                     <div class="revoked-perms-header">
                         @foreach($userRevokedPerms as $permission)
-                            <span class="badge badge-danger badge-clickable badge-grantable"><a href="">{{$permission->name}}</a></span>
+                            <span class="badge badge-danger badge-clickable badge-grantable"><a href="{{route('permissions.ajax.request')}}?user={{$user->id}}&perm={{$permission->id}}&grant=true">{{$permission->name}}</a></span>
                         @endforeach
                     </div>
                 @endif

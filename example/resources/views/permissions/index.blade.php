@@ -47,12 +47,8 @@
     <hr>
     <h4>Permissies verlenen</h4>
         @if($admin)
-            <?php $users = \App\User::all(); ?>
-            <?php $permissions = \App\Permission::all(); ?>
-
-            <div id="ajaxHolder">
-                @include('components.permissions.adminPanel',
-                    ['users ' => $users])
+            <div class="ajaxHolder">
+                @include('components.permissions.adminPanel')
             </div>
         @else
             <p>U kunt anderen geen permissies verlenen.</p>
@@ -64,17 +60,26 @@
     @if($admin)
         <script>
             $(document).ready(function() {
-                $(document).on('click', '.badge-clickable a', function (e) {
+                $(document).on('click', '.badge-grantable a', function (e) {
                     e.preventDefault();
                     let url = $(this).attr('href');
-                    getAdminUsers(url.split('user=')[1], url.split('perm=')[1])
+                    getAdminUsers(url.split('user=')[1], url.split('perm=')[1], true)
+                });
+
+                $(document).on('click', '.badge-revokeable a', function (e) {
+                    e.preventDefault();
+                    let url = $(this).attr('href');
+                    getAdminUsers(url.split('user=')[1], url.split('perm=')[1], false)
                 });
             });
 
             // Ajax request to change permission and reload
-            function getAdminUsers($user, $permission) {
-                let url = '{{route('permissions.ajax.request')}}' + '?user=' + $user + '&perm=' + $permission;
-                let hash = $user + '&' + $permission;
+            function getAdminUsers(user, permission, grant = false) {
+                let url = '{{route('permissions.ajax.request')}}' + '?user=' + user + '&perm=' + permission;
+
+                if (grant === true)
+                    url += '&grant=true';
+
                 // Perform ajax request
                 $.ajax({
                     url : url,
@@ -83,7 +88,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                 }).done(function (data) {
-                    location.hash = hash;
+                    $('.ajaxHolder').html(data.html);
                 }).fail(function () {
                     console.log("ajax request to perform permission action failed.");
                 });
