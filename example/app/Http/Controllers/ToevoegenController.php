@@ -11,7 +11,7 @@ use DB;
 class ToevoegenController extends Controller
 {
     public function index() {
-        $categories = Category::get();
+        $categories = Category::all();
         return View("toevoegen.index", compact('categories'));
     }
 

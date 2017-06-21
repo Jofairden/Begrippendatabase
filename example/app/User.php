@@ -31,4 +31,12 @@ class User extends Authenticatable
     {
     	return $this->belongsToMany(Permission::class);
     }
+
+	public static function hasRole($user, $perm)
+	{
+		return \DB::table('permission_user')
+			->where('user_id', $user)
+			->where('permission_id', $perm)
+			->count() > 0;
+	}
 }
