@@ -94,14 +94,6 @@
                 console.log("concepts could not be loaded through ajax");
             });
         }
-        // Delay helper
-        let delay = (function(){
-            let timer = 0;
-            return function(callback, ms){
-                clearTimeout (timer);
-                timer = setTimeout(callback, ms);
-            };
-        })();
 
         // Allows for a small delay before getting concepts when searching
         // This to minimize the network load

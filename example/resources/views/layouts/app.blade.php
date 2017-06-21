@@ -7,21 +7,18 @@
 
     <!-- CSRF Token -->
     <script>
-        window.Laravel = <?php echo json_encode([
-              'csrfToken' => csrf_token(),
-          ]); ?>;
+        window.Laravel = { csrfToken: '{{ csrf_token() }}' };
     </script>
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @yield('styles')
 
     <!-- Scripts -->
-    <script>
-        window.Laravel = { csrfToken: '{{ csrf_token() }}' };
-    </script>
-    @yield('styles')
+
 </head>
 <body>
     <nav class="navbar navbar-toggleable-md navbar-light">
@@ -81,7 +78,16 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
-    <script src="{{ asset('js/functions.js') }}"></script> 
+    <script src="{{ asset('js/functions.js') }}"></script>
+    <script>
+        // Delay helper
+        let delay = (function(){
+            let timer = 0;
+            return function(callback, ms){
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();</script>
     @yield('scripts')
 </body>
 </html>

@@ -19,6 +19,20 @@
            .btm-20 { 
                margin-bottom: 2rem;
             }
+
+        .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #0abe3c;
+            background-image: none;
+            border-color: #12ad26;
+        }
+
+        #cats
+        {
+            overflow-y: scroll;
+            height: 400px;
+        }
+
     </style>
 @endsection
 
@@ -60,19 +74,35 @@
             </div>
         </div>
 
+        <h5 class="top-20">Categorieen voor dit begrip:</h5>
         <div class="form-group-row">
-            <div class="col-10">          
-                <h5 class="top-20">Categorieen voor dit begrip:</h5>
-                @foreach($categories as $category) 
-                    <div class="checkbox">
-                        <label class="form-check-label" for="category-{{ $category->id }}">
-                            <input type="checkbox" name="category-{{ $category->id }}" class="form-check-input">
-                            {{ $category->name }}
-                        </label>
-                    </div>
+            <select class="selectpicker" multiple>
+                @foreach($categories as $category)
+                    <option>{{$category->name}}</option>
                 @endforeach
-            </div>
+            </select>
         </div>
+
+
+
+        {{--<div class="form-group-row">--}}
+            {{--<div class="col-4" id="cats">--}}
+                {{--<div class="card p-2" style="padding-bottom:0;">--}}
+                    {{--@foreach($categories->chunk(3) as $catchunk)--}}
+                        {{--<div class="btn-group p-0" data-toggle="buttons">--}}
+                        {{--@foreach($catchunk as $category)--}}
+                            {{--<label class="btn btn-primary form-check-label" for="category-{{ $category->id }}">--}}
+                                {{--<input type="checkbox" checked autocomplete="off" name="category-{{ $category->id }}" class="form-check-input">--}}
+                                {{--{{ $category->name }}--}}
+                            {{--</label>--}}
+                        {{--@endforeach--}}
+                        {{--</div>--}}
+                        {{--<hr>--}}
+                    {{--@endforeach--}}
+                {{--</div>--}}
+
+            {{--</div>--}}
+        {{--</div>--}}
 
         <div class="form-group-row">
             <div class="col-10">

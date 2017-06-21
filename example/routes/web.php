@@ -62,5 +62,12 @@ Route::prefix('permissions')
 	{
 		Route::name('permissions.index')
 			->get('/', 'PermissionController@index');
+
+		Route::prefix('ajax')
+			->group(function()
+			{
+				Route::name('permissions.ajax.request')
+					->get('/permissions/ajax/request', 'PermissionController@ajax');
+			});
 	});
 

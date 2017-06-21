@@ -6,6 +6,31 @@
     $admin = $user->permissions()->where('name', 'admin')->first();
 ?>
 
+@section('styles')
+    <style>
+        div[class*='-perms-header']
+        {
+            display: inline-block;
+        }
+
+        .badge-clickable:hover
+        {
+            cursor: pointer;
+        }
+        .badge-clickable a
+        {
+            color: white;
+        }
+
+        .badge-clickable a:hover,
+        .badge-clickable a:active,
+        .badge-clickable a:focus
+        {
+            text-decoration: none;
+        }
+    </style>
+@endsection
+
 @section('content')
     <h1>Permissies voor {{$user->name}}</h1>
     <hr>
@@ -24,26 +49,45 @@
         @if($admin)
             <?php $users = \App\User::all(); ?>
             <?php $permissions = \App\Permission::all(); ?>
-            <div class="users">
-                @foreach($users as $user)
-                    <div class="card mb-1">
-                        <div class="card-block m-0">
-                            <h4 class="card-title">{{$user->name}}</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">{{$user->email}}</h6>
-                            <ul class="card-text user-permissions">
-                                @foreach($user->permissions as $permission)
-                                    <li class="user-permission-granted">
-                                        {{$permission->name}}
-                                        (<a href="">ontkennen</a>)
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
 
-                @endforeach
+            <div id="ajaxHolder">
+                @include('components.permissions.adminPanel',
+                    ['users ' => $users])
             </div>
         @else
             <p>U kunt anderen geen permissies verlenen.</p>
         @endif
+@endsection
+
+
+@section('scripts')
+    @if($admin)
+        <script>
+            $(document).ready(function() {
+                $(document).on('click', '.badge-clickable a', function (e) {
+                    e.preventDefault();
+                    let url = $(this).attr('href');
+                    getAdminUsers(url.split('user=')[1], url.split('perm=')[1])
+                });
+            });
+
+            // Ajax request to change permission and reload
+            function getAdminUsers($user, $permission) {
+                let url = '{{route('permissions.ajax.request')}}' + '?user=' + $user + '&perm=' + $permission;
+                let hash = $user + '&' + $permission;
+                // Perform ajax request
+                $.ajax({
+                    url : url,
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                }).done(function (data) {
+                    location.hash = hash;
+                }).fail(function () {
+                    console.log("ajax request to perform permission action failed.");
+                });
+            }
+        </script>
+    @endif
 @endsection
