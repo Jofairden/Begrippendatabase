@@ -39,4 +39,9 @@ class User extends Authenticatable
 			->where('permission_id', $perm)
 			->count() > 0;
 	}
+
+    public static function hasName(int $user, string $perm) { 
+        // return \DB::table('permission_user')
+        //     ->where('user_id', )
+    }
 }

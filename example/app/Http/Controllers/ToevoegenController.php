@@ -17,31 +17,23 @@ class ToevoegenController extends Controller
 
     public function post(Request $request) {
         $count = DB::table('categories')->count();
-        
-        $selected = array(); 
+
         $name = $request->input('begripname');
         $info = $request->input('omschrijving');
         $email = $request->input('email');
-
-        for($i = 1; $i < $count; $i++) {
-            //Kijk welke categorieen zijn geselecteerd en add in array;
-            $category = "category-" . $i;
-            if($request->input($category) == "on") {
-                $selected[] = $i;
-            }
-        }      
+        $categories = $request->input('categories');   
 
         DB::table('suggested')->insert(
             [
                 'name' => $name,
                 'info' => $info,
-                'categories' => implode(",", $selected), //Eerst opslaan als comma seperated. Komen in koppeltabel als begrip is geaccepteerd.
+                'categories' => implode(",", $categories), //Eerst opslaan als comma seperated. Komen in koppeltabel als begrip is geaccepteerd.
                 'email' => $email
             ]
         );
 
         $categoryNames = array();
-        foreach($selected as $category) {
+        foreach($categories as $category) {
             //Haal alle categorie namen op voor in de e-mail;
             $categoryNames[] = DB::table('categories')->where('id', '=', $category)->pluck('name')->first();
         } 

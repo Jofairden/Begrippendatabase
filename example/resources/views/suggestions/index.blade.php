@@ -33,16 +33,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($suggestions as $suggestion)
-            <tr id="{{ $suggestion->id }}">
-                <td class="suggest-name">{{ $suggestion->name }}</td>
-                <td class="suggest-info">{{ $suggestion->info }}</td>
-                <td>@foreach($suggestion->categories as $category)  <span>{{ $category }}</span>  @endforeach</td>
-                <td><button type="button" class="btn btn-success">Accepteer</button></td>
-                <td><button type="button" class="btn btn-warning">Bewerk</button></td>
-                <td><button type="button" data-toggle="modal" data-target="#removeModal" class="btn btn-danger open">Verwijder</button></td>
-            </tr>
-            @endforeach
+            @if(!empty($suggestions))
+                @foreach($suggestions as $suggestion)
+                <tr id="{{ $suggestion->id }}">
+                    <td class="suggest-name">{{ $suggestion->name }}</td>
+                    <td class="suggest-info">{{ $suggestion->info }}</td>
+                    <td>@foreach($suggestion->categories as $category)  <span>{{ $category }}</span>  @endforeach</td>
+                    <td><button type="button" class="btn btn-success">Accepteer</button></td>
+                    <td><a href="{{ action('SuggestiesController@edit', ['id' => $suggestion->id]) }}"><button type="button" class="btn btn-warning">Bewerk</button></a></td>
+                    <td><button type="button" data-toggle="modal" data-target="#removeModal" class="btn btn-danger open">Verwijder</button></td>
+                </tr>
+                @endforeach
+            @endif
         </tbody>
     </table>
 

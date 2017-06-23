@@ -34,4 +34,6 @@ $('document').ready(function(){
 
 });
 
-$('.selectpicker').selectpicker();
+$('.selectpicker').selectpicker({
+    noneSelectedText : "Niets geselecteerd"
+});

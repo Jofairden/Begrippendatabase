@@ -10,16 +10,4 @@
 
 			Route::name('concepts.ajax.request')
 				->get('/ajax/request', 'ConceptController@ajax');
-
-			Route::middleware('permission:5')->group(function ()
-			{
-				Route::prefix('create')
-					->group(function()
-					{
-						Route::name('concepts.create')
-							->get('/test', 'ToevoegenController@index');
-
-						Route::post('/', 'ToevoegenController@post');
-					});
-			});
 		});

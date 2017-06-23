@@ -16,7 +16,7 @@ class CreateSuggestedTable extends Migration
         Schema::create('suggested', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('info')->nullable();
+            $table->text('info');
             $table->string('categories');
             $table->string('email');
         });

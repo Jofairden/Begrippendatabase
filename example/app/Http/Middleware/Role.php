@@ -18,10 +18,8 @@ class Role
 	 */
 	public function handle($request, Closure $next, $role)
 	{
-		dd($request->user());
-
-		if (! User::hasRole($request->user()->id, $role)) {
-			return view('home');
+		if (!User::hasRole($request->user()->id, $role)) {
+			return redirect('home');
 		}
 
 		return $next($request);
