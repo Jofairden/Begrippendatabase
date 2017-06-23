@@ -7,6 +7,6 @@
 			Route::post('/', 'SuggestiesController@post');
 
 			Route::get('/edit/{id}', 'SuggestiesController@edit');
-			Route::post('/edit/{id}', 'SuggestiesController@post');
+			Route::post('/edit/{id}', 'SuggestiesController@saveEdit');
 			Route::delete('/', 'SuggestiesController@delete');
 		});

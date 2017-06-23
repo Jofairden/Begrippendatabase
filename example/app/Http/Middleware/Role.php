@@ -19,7 +19,7 @@ class Role
 	public function handle($request, Closure $next, $role)
 	{
 		if (!User::hasRole($request->user()->id, $role)) {
-			return redirect('home');
+			return redirect('/'); //Terug naar hûs
 		}
 
 		return $next($request);

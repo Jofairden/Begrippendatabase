@@ -223,7 +223,9 @@ a[x-apple-data-detectors=true] {
 <div align="center" class="button-container center" style="padding-right: 10px; padding-left: 10px; padding-top:10px; padding-bottom:10px;">
   <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top:10px; padding-bottom:10px;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:34px; v-text-anchor:middle; width:168px;" arcsize="12%" strokecolor="#3AAEE0" fillcolor="#3AAEE0"><w:anchorlock/><center style="color:#ffffff; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px;"><![endif]-->
     <div style="color: #ffffff; background-color: #3AAEE0; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; max-width: 148px; width: 108px; width: auto; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent; padding-top: 5px; padding-right: 20px; padding-bottom: 5px; padding-left: 20px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; text-align: center; mso-border-alt: none;">
-      <span style="font-size:12px;line-height:24px;">Opnieuw proberen</span>
+      <a href="{{ action('ToevoegenController@index') }}">
+        <span style="font-size:12px;line-height:24px;">Opnieuw proberen</span>
+      </a>
     </div>
   <!--[if mso]></center></v:roundrect></td></tr></table><![endif]-->
 </div>
