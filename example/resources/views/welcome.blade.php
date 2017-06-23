@@ -30,10 +30,10 @@
     @endcomponent
     <div class="ajaxStats">
         Resultaat
-        <span class="ajaxStats-first">{{ $concepts->firstItem() || 0 }}</span>
-        - <span class="ajaxStats-last">{{ $concepts->lastItem() || 0 }}</span>
-        van <span class="ajaxStats-total">{{ $concepts->total() || 0 }}</span>
-        begrippen (pagina <span class="ajaxStats-page">{{ $concepts->currentPage() || 1 }}</span>)
+        <span class="ajaxStats-first">{{ $concepts->firstItem() }}</span>
+        - <span class="ajaxStats-last">{{ $concepts->lastItem() }}</span>
+        van <span class="ajaxStats-total">{{ $concepts->total() }}</span>
+        begrippen (pagina <span class="ajaxStats-page">{{ $concepts->currentPage() }}</span>)
     </div>
     <hr>
     <hr>

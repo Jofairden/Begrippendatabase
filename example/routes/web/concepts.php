@@ -3,7 +3,7 @@
 		->group(function()
 		{
 			Route::name('concepts.index')
-				->get('/', 'ConceptController@index');
+				->get('/', 'ConceptController@ajax');
 
 			Route::name('concepts.show')
 				->get('/{concept}', 'ConceptController@show');

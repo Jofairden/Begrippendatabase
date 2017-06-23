@@ -2,9 +2,7 @@
 	
 	// Basic routes
 	Route::name('welcome')
-		->get('/', function () {
-			return view('welcome', ["concepts" => \App\Concept::paginate(15)]);
-		});
+		->get('/', 'ConceptController@ajax');
 
 	// Routes
 

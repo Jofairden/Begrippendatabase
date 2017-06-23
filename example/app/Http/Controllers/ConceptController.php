@@ -9,26 +9,7 @@ class ConceptController extends Controller
 {
 	public function index(Request $request)
 	{
-		$sort = $request->input('sort');
-		$query = $request->input('query');
-		$concepts = null;
-
-		if ($sort == "desc")
-		{
-			$concepts = Concept::byName("DESC");
-		}
-		else
-		{
-			$concepts = Concept::byName("ASC");
-		}
-
-		if (isset($query))
-		{
-			$concepts = $concepts->where('name', $query)
-				->orWhere('name', 'like', '%' . $query . '%');
-		}
-
-		$concepts = $concepts->paginate(15);
+		$concepts = Concept::paginate(15);
 		return view('concepts.index', compact('concepts'));
 	}
 

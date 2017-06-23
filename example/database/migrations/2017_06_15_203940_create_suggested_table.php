@@ -15,10 +15,12 @@ class CreateSuggestedTable extends Migration
     {
         Schema::create('suggested', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('info');
+            $table->string('name', 55);
+            $table->text('info', 555);
             $table->string('categories');
             $table->string('email');
+	        $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+	        $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

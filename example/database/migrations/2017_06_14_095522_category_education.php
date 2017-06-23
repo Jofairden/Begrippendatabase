@@ -29,6 +29,6 @@ class CategoryEducation extends Migration
      */
     public function down()
     {
-        //
+	    Schema::dropIfExists('category_education');
     }
 }

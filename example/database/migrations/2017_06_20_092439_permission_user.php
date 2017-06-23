@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePermissionUserTable extends Migration
+class PermissionUser extends Migration
 {
     /**
      * Run the migrations.
@@ -29,6 +29,5 @@ class CreatePermissionUserTable extends Migration
      */
     public function down()
     {
-	    Schema::dropIfExists('permission_user');
     }
 }
