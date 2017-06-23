@@ -29,6 +29,30 @@
                         </div>
                     </div>
                 @endif
+
+                @if (Auth::check())
+                    <?php $userNotes = $concept->notes(Auth::id()) ?>
+                    @if(count($userNotes) > 0)
+                        <hr>
+                        <h4 class="notes-header-{{$concept->id}}">Notities</h4>
+                        <a class="btn btn-sm btn-success btn-notes-add" href="{{ route('notes.create') }}?concept={{$concept->id}}" role="button">Nieuwe aanmaken</a>
+                        <div class="concept-notes-{{$concept->id}}">
+                            @foreach($userNotes as $note)
+                                <div class="card note-card mb-2" id="note-{{$note->id}}-user-{{Auth::id()}}">
+                                    <div class="card-header">
+                                        <h5 class="note-name">{{ $note->name }}</h5>
+                                        <span class="note-updated_at card-subtitle">{{ $note->updated_at }}</span>
+                                    </div>
+                                    <div class="card-block">
+                                        <span class="note-info">
+                                            {{ $note->info }}
+                                        </span>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                @endif
             </div>
         </div>
     </div>

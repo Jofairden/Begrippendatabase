@@ -98,3 +98,13 @@ footer
 {
   margin-bottom: .5em;
 }
+h4[class^='notes-header-'],
+.note-name,
+.btn-notes-add{
+  display:inline;
+}
+
+div[class^='concept-notes-'] .note-card:last-child
+{
+  margin-bottom: 0!important;
+}

@@ -80,6 +80,16 @@
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ asset('js/functions.js') }}"></script>
     <script>
+        $.urlParam = function(name){
+            let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results === null){
+                return null;
+            }
+            else{
+                return decodeURI(results[1]) || 0;
+            }
+        };
+
         // Delay helper
         let delay = (function(){
             let timer = 0;

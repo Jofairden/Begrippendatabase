@@ -23,4 +23,9 @@ class Concept extends Model
 	{
 		return $this->belongsToMany(Category::class);
 	}
+
+	public function notes($user_id)
+	{
+		return Note::fromUser($user_id, $this->id);
+	}
 }

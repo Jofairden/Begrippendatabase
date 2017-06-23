@@ -13,6 +13,7 @@
 	include('web/permissions.php');
 	include('web/suggest.php');
 	include('web/suggestions.php');
+	include('web/notes.php');
 
 	// Auth
 	Auth::routes();
