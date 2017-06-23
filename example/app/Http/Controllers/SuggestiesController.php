@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 class SuggestiesController extends Controller
 {
     public function __construct() {
+        $this->middleware('auth');
         $this->middleware('role:1'); //Alleen voor admins
     }
 
@@ -20,12 +21,13 @@ class SuggestiesController extends Controller
         $suggestions = Suggestion::get();
         foreach($suggestions as $suggestion) { 
             $categoryNames = array();
-            $categoryIDs = explode(", ", $suggestion->categories); //Convert naar int array zodat we namen kunnen ophalen uit DB.
+            $categoryIDs = explode(",", $suggestion->categories); //Convert naar int array zodat we namen kunnen ophalen uit DB.
             foreach($categoryIDs as $categoryID) {
                 $categoryNames[] = DB::table('categories')->where('id', '=', $categoryID)->pluck('name')->first();
             }
             $suggestion->categories = $categoryNames;
-        }
+        } 
+        //dd($suggestions);
         return view('suggestions.index', compact('suggestions'));
     } 
 
@@ -51,7 +53,7 @@ class SuggestiesController extends Controller
         $suggestion->delete();
         
         if(!$request->ajax()) {
-            return view('suggestions.index');
+            return redirect()->action("SuggestiesController@index");
         }
     }
 
@@ -65,6 +67,18 @@ class SuggestiesController extends Controller
         $data['suggestion'] = $suggestion; 
         $data['categories'] = $categories;
         return view('suggestions.edit', compact('data'));
+    }
+
+    public function saveEdit(Request $request) {
+        $suggestion = Suggestion::find($request->input('id'));
+        if(!empty($request->input('name'))) $suggestion->name = $request->input('name');
+        if(!empty($request->input('info'))) $suggestion->info = $request->input('info');
+        if(!empty($request->input('categories'))) $suggestion->categories = implode(',', $request->input('categories'));
+        
+        $suggestion->save();
+
+        $this->post($request);
+        return redirect()->action('SuggestiesController@index');
     }
 
     public function delete(Request $request) { 

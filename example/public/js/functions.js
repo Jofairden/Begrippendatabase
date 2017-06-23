@@ -28,6 +28,7 @@ $('document').ready(function(){
             success: function(response) { 
                 var tr = "tr#" + id;
                 $(tr).fadeOut(500);
+                $("#reason").val('');
             },
         });
     });
