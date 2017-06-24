@@ -19,7 +19,7 @@
                 @if ($concept->categories->count() > 0)
                     <hr>
                     <h4>Categorieën</h4>
-                    <div class="col-xs-12 col-sm-4 p-0">
+                    <div class="col-xs-12 col-md-6 col-lg-4 p-0">
                         <div class="card">
                             <div class="card-block">
                                 @foreach($concept->categories as $category)
@@ -32,25 +32,23 @@
 
                 @if (Auth::check())
                     <?php $userNotes = $concept->notes(Auth::id()) ?>
+                    <hr>
+                    <div class="float-right">
+                        @component('components.notes.note-create-button')
+                            @slot('conceptid', $concept->id)
+                        @endcomponent
+                    </div>
+                    <h4 class="notes-header-{{$concept->id}}">Notities</h4>
                     @if(count($userNotes) > 0)
-                        <hr>
-                        <h4 class="notes-header-{{$concept->id}}">Notities</h4>
-                        <a class="btn btn-sm btn-success btn-notes-add" href="{{ route('notes.create') }}?concept={{$concept->id}}" role="button">Nieuwe aanmaken</a>
                         <div class="concept-notes-{{$concept->id}}">
                             @foreach($userNotes as $note)
-                                <div class="card note-card mb-2" id="note-{{$note->id}}-user-{{Auth::id()}}">
-                                    <div class="card-header">
-                                        <h5 class="note-name">{{ $note->name }}</h5>
-                                        <span class="note-updated_at card-subtitle">{{ $note->updated_at }}</span>
-                                    </div>
-                                    <div class="card-block">
-                                        <span class="note-info">
-                                            {{ $note->info }}
-                                        </span>
-                                    </div>
-                                </div>
+                                @component('components.notes.note-card')
+                                    @slot('note', $note)
+                                @endcomponent
                             @endforeach
                         </div>
+                    @else
+                        <p>Geen notities.</p>
                     @endif
                 @endif
             </div>

@@ -15,12 +15,13 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
     @yield('styles')
 
     <!-- Scripts -->
-
 </head>
 <body>
+
     <nav class="navbar navbar-toggleable-md navbar-light">
         <div class="container">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +67,7 @@
     </nav>
 
 
-    <div class="main-content container mb-5" id="app">
+    <div class="main-content container center-block mb-5" id="app">
         @yield('content')
     </div>
 

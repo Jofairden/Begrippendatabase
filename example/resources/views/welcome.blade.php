@@ -61,11 +61,19 @@
 
         // override for pagination urls
         $(document).ready(function() {
-            $(document).on('click', '.pagination a', function (e) {
-                let url = $(this).attr('href');
-                getConcepts(url.split('page=')[1], url.split('query=')[1], url.split('sort=')[1]);
-                e.preventDefault();
-            });
+
+            let hash = document.location.hash;
+            if (hash)
+            {
+                $('a[href="'+ hash +'"]').click();
+            }
+
+        });
+
+        $(document).on('click', '.pagination a', function (e) {
+            let url = $(this).attr('href');
+            getConcepts(url.split('page=')[1], url.split('query=')[1], url.split('sort=')[1]);
+            e.preventDefault();
         });
 
         // ajax function to get concepts

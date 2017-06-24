@@ -59,5 +59,13 @@ class DatabaseSeeder extends Seeder
 			    array('name' => 'master', 'info' => 'Alle permissies: create, edit, delete.'),
 			    array('name' => 'admin', 'info' => 'Administrator.'),
 		    ));
+
+        DB::table('notes')->insert(
+        	array(
+        		array('name' => 'Lorum Ipsum', 'info' => 'dolor', 'concept_id' => 1, 'user_id' => 1),
+        		array('name' => 'Sit', 'info' => 'amet', 'concept_id' => 1, 'user_id' => 1),
+        		array('name' => 'consectetur ', 'info' => 'adipiscing elit', 'concept_id' => 2, 'user_id' => 1),
+			)
+		);
     }
 }

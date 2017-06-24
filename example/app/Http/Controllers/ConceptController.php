@@ -48,7 +48,7 @@ class ConceptController extends Controller
 		}
 
 		if ($concepts === null)
-			$concepts = Concept::paginate(15);
+			$concepts = Concept::orderBy('name', 'ASC')->paginate(15);
 		else
 			$concepts = $concepts->paginate(15);
 

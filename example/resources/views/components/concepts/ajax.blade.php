@@ -12,6 +12,8 @@
 
 <div class="row col-12 justify-content-center">
     <form id="#sortForm">
+        @include('components.forms.error-messages')
+        @include('components.forms.flash-messages')
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary @if($sortNameASC) active @endif" name="label_Sort" id="label_sortNameASC">
                 <input type="radio" name="sort" id="sortNameASC" autocomplete="off" @if($sortNameASC) checked @endif>Oplopend

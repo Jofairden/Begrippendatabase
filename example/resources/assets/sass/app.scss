@@ -108,3 +108,13 @@ div[class^='concept-notes-'] .note-card:last-child
 {
   margin-bottom: 0!important;
 }
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+.show {
+  display: inherit;
+  visibility: visible;
+}
