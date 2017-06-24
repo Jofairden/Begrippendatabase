@@ -22,50 +22,11 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-toggleable-md navbar-light">
-        <div class="container">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Biobegrippen') }}
-            </a>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('concepts.index')}}">Begrippen</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('categories.index')}}">Categorieën</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('educations.index')}}">Onderwijsniveaus</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('api.index')}}">API</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Account <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            @if (Auth::guest())
-                                <a href="{{ route('login') }}" class="dropdown-item">Log in</a>
-                                <a href="{{ route('register') }}" class="dropdown-item">Register</a>
-                            @else
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item">Log out</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            @endif
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    @component('components.nav.nav',
+    [
+        'brand' => [config('app.name', 'Biobegrippen'), url('/')]
+    ])
+    @endcomponent
 
     <div class="main-content container center-block mb-5" id="app">
         @yield('content')
@@ -81,6 +42,7 @@
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ asset('js/functions.js') }}"></script>
     <script>
+        // Url parameter helper
         $.urlParam = function(name){
             let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
             if (results === null){
