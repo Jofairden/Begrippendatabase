@@ -68,13 +68,35 @@
                 $('a[href="'+ hash +'"]').click();
             }
 
+            $('.pagination a').click(function(e){
+                let url = $(this).attr('href');
+                getConcepts(url.split('page=')[1], url.split('query=')[1], url.split('sort=')[1]);
+                e.preventDefault();
+            });
+
+            $('[data-toggle="popover"]').popover({
+                delay: {"show" : 250, "hide" : 250},
+                placement: "top",
+                trigger: "hover",
+                //offset: "0 48px", // tether
+                template: '<div class="popover" role="tooltip"><div class="popover-arrow"></div><div class="popover-content"></div></div>',
+                container: 'body',
+            });
+
+            $('a[id*="popover-concept-"]').on({
+//            mouseenter: function(e) {
+//                $(this).popover('show');
+//            },
+//            mouseleave: function(e) {
+//                $(this).popover('hide');
+//            },
+//            click: function(e) {
+//                $(this).popover('toggle');
+//            }
+            });
         });
 
-        $(document).on('click', '.pagination a', function (e) {
-            let url = $(this).attr('href');
-            getConcepts(url.split('page=')[1], url.split('query=')[1], url.split('sort=')[1]);
-            e.preventDefault();
-        });
+
 
         // ajax function to get concepts
         function getConcepts(page, query, sort) {

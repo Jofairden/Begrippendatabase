@@ -131,3 +131,12 @@ div[class^='concept-notes-'] .note-card:last-child
 {
   color: white;
 }
+
+.no-link,
+.no-link:hover,
+.no-link:focus,
+.no-link:active
+{
+  color: inherit;;
+  text-decoration: none;
+}

@@ -1,10 +1,15 @@
 <div class="row justify-content-center">
     <div class="card col-11 p-0">
         <div class="card-header" role="tab" id="heading{{$concept->id}}">
+            <div class="float-right">
+                <a tabindex="{{ $concept->id }}" class="fa fa-info-circle no-link" id="popover-concept-{{$concept->id}}" aria-hidden="true" role="button" data-toggle="popover" data-container="body" data-trigger="focus" title="Last edited on" data-content="{{ $concept->updated_at }}"></a>
+            </div>
+
             <h5 class="mb-0">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$concept->id}}" aria-expanded="true" aria-controls="collapse{{$concept->id}}">
                     {!!html_entity_decode($concept->name)!!}
                 </a>
+
             </h5>
         </div>
 
