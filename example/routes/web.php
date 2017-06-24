@@ -17,3 +17,11 @@
 
 	// Auth
 	Auth::routes();
+
+	// Locale route
+	Route::get('setlocale/{locale}', function ($locale) {
+		if (in_array($locale, \Config::get('app.locales'))) {
+			Session::put('locale', $locale);
+		}
+		return redirect()->back();
+	});
