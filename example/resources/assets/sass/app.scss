@@ -123,3 +123,11 @@ div[class^='concept-notes-'] .note-card:last-child
 {
   margin: 0 auto!important;
 }
+
+.badge-primary > a,
+.badge-primary > a:focus,
+.badge-primary > a:hover,
+.badge-primary > a:active
+{
+  color: white;
+}

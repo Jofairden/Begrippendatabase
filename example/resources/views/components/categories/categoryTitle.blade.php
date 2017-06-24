@@ -10,7 +10,9 @@
 @if (isset($withRelations) and $withRelations)
     @foreach($category->educations as $education)
         <span class="badge badge-primary">
-            {{ $education->name }}
+            <a href="{{ route('educations.show', $education->id) }}">
+                {{ $education->name }}
+            </a>
         </span>
     @endforeach
 @endif

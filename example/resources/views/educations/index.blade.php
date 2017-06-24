@@ -10,8 +10,10 @@
         <div class="col-sm-4 p-0">
             @foreach($education->categories as $category)
                 <span class="badge badge-primary">
-                {{ $category->name }}
-            </span>
+                    <a href="{{ route('categories.show', $category->id) }}">
+                        {{ $category->name }}
+                    </a>
+                </span>
             @endforeach
         </div>
         <div class="col-sm-6 col-xs-12 p-0">
