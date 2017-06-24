@@ -24,10 +24,13 @@
                 @endcomponent
                 @component('components.nav.nav-account',
                 [
-                    'text'      => 'Account',
+                    'text'      => Auth::check() ? Auth::user()->name : 'Account',
                     'login'     => ['Log in', route('login')],
                     'logout'    => ['Log uit', route('logout')],
                     'register'  => ['Registreer', route('register')],
+                    'profile'   => ['Profiel', route('profile.index')],
+                    'notes'     => ['Notities', route('profile.notes')],
+                    'perms'     => ['Permissies', route('permissions.index')],
                 ])
                 @endcomponent
             </ul>

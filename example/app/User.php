@@ -65,4 +65,9 @@ class User extends Authenticatable
         // return \DB::table('permission_user')
         //     ->where('user_id', )
     }
+
+    public function notes()
+	{
+		return Note::where('user_id', $this->id)->get();
+	}
 }

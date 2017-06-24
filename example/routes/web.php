@@ -14,6 +14,7 @@
 	include('web/suggest.php');
 	include('web/suggestions.php');
 	include('web/notes.php');
+	include('web/profile.php');
 
 	// Auth
 	Auth::routes();
