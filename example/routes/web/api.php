@@ -1,123 +1,81 @@
 <?php
 
-use App\Concept;
 use App\Category;
-use App\Relconcat;
+use App\Concept;
 
-Route::prefix('api')
-	->group(function()
-{
-	Route::name('api.index')
-		->get('/', function()
-		{
-			return view('api');
+Route::group(['prefix' => 'api'], function () {
+	Route::get('/', function () {
+		return view('api');
+	})->name('api.index');
+
+	Route::get('/concept/{concept}', function (Concept $concept) {
+		return $concept;
+	})->name('api.concept');
+
+	Route::get('/category/{category}', function (Category $category) {
+		return $category;
+	})->name('api.category');
+
+	Route::group(['prefix' => 'categories'], function () {
+		Route::get('/', function () {
+			return Category::get();
+		})->name('api.categories');
+
+		Route::group(['prefix' => 'sort'], function () {
+			Route::get('/id', function () {
+				Category::orderBy('id')->get();
+			})->name('api.categories.id');
+
+			Route::get('/id/desc', function () {
+				return Category::orderBy('id', 'desc')->get();
+			})->name('api.categories.id.desc');
+
+			Route::get('/name', function () {
+				return Category::orderBy('name')->get();
+			})->name('api.categories.name');
+
+			Route::get('/name/desc', function () {
+				return Category::orderBy('name', 'desc')->get();
+			})->name('api.categories.name.desc');
 		});
+	});
 
-	Route::name('api.concept')
-		->get('/concept/{concept}', function(Concept $concept)
-		{
-			return $concept;
-		});
+	Route::group(['prefix' => 'concepts'], function () {
+		Route::get('/', function () {
+			return Concept::get();
+		})->name('api.concepts');
 
-	Route::name('api.category')
-		->get('/category/{category}', function(Category $category)
-		{
-			return $category;
-		});
-
-	Route::prefix('categories')
-		->group(function()
-		{
-			Route::name('api.categories')
-			->get('/', function()
+		Route::group(['prefix' => 'sort'], function () {
+			// figure out how this works?
+			/*Route::any("{slug}/first", function($request)
 			{
-				return Category::all();
-			});
+				return route($request)->first();
+			})->where('slug', '.*');*/
 
-			Route::prefix('sort')
-				->group(function ()
-				{
-					Route::name('api.categories.id')
-						->get('/id', function ()
-						{
-							Category::byId()->get();
-						});
+			Route::get('/id', function () {
+				return Concept::orderBy('id')->get();
+			})->name('api.concepts.id');
 
-					Route::name('api.categories.id.desc')
-						->get('/id/desc', function ()
-						{
-							return Category::byID("DESC")->get();
-						});
+			Route::get('/id/desc', function () {
+				return Concept::orderBy('id', 'desc')->get();
+			})->name('api.concepts.id.desc');
 
-					Route::name('api.categories.name')
-						->get('/name', function()
-						{
-							return Category::byName()->get();
-						});
+			Route::get('/name', function () {
+				return Concept::orderBy('name')->get();
+			})->name('api.concepts.name');
 
-					Route::name('api.categories.name.desc')
-						->get('/name/desc', function()
-						{
-							return Category::byName("DESC")->get();
-						});
-				});
+			Route::get('/name/desc', function () {
+				return Concept::orderBy('name', 'desc')->get();
+			})->name('api.concepts.name.desc');
+
+
+			Route::get('/info', function () {
+				return Concept::orderBy('info')->get();
+			})->name('info');
+
+			Route::get('/info/desc', function () {
+				return Concept::orderBy('info', 'desc')->get();
+			})->name('info.desc');
 		});
-
-	Route::prefix('concepts')
-		->group(function()
-		{
-			Route::name('api.concepts')
-				->get('/', function()
-				{
-					return Concept::all();
-				});
-
-			Route::prefix('sort')
-				->group(function()
-				{
-					// figure out how this works?
-//					Route::any("{slug}/first", function($request)
-//					{
-//						return route($request)->first();
-//					})->where('slug', '.*');
-
-					Route::name('api.concepts.id')
-						->get('/id', function()
-						{
-							return Concept::byID()->get();
-						});
-
-					Route::name('api.concepts.id.desc')
-						->get('/id/desc', function ()
-						{
-							return Concept::byID("DESC")->get();
-						});
-
-					Route::name('api.concepts.name')
-						->get('/name', function()
-						{
-							return Concept::byName()->get();
-						});
-
-					Route::name('api.concepts.name.desc')
-						->get('/name/desc', function()
-						{
-							return Concept::byName("DESC")->get();
-						});
-
-
-					Route::name('info')
-						->get('/info', function()
-						{
-							return Concept::byInfo()->get();
-						});
-
-					Route::name('info.desc')
-						->get('/info/desc', function()
-						{
-							return Concept::byInfo("DESC")->get();
-						});
-				});
-
-		});
+	});
 });

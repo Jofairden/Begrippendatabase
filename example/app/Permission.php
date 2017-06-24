@@ -4,6 +4,21 @@ namespace App;
 
 use App\Model;
 
+/**
+ * App\Permission
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $info
+ * @property string $created_at
+ * @property string $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Permission extends Model
 {
     //

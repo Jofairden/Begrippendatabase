@@ -2,6 +2,26 @@
 
 namespace App;
 
+/**
+ * App\Category
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $info
+ * @property string $created_at
+ * @property string $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Concept[] $concepts
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Education[] $educations
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category attr()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category byID($order = 'ASC')
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category byName($order = 'ASC')
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Category extends Model
 {
 	public $timestamps = false;
