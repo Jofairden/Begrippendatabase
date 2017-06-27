@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-06-24.
+    * Generated on 2017-06-26.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -101,6 +101,7 @@ namespace PHPSTORM_META {
         'command.queue.failed-table' => Illuminate\Queue\Console\FailedTableCommand::class,
         'command.queue.table' => Illuminate\Queue\Console\TableCommand::class,
         'command.request.make' => Illuminate\Foundation\Console\RequestMakeCommand::class,
+        'command.rule.make' => Illuminate\Foundation\Console\RuleMakeCommand::class,
         'command.seeder.make' => Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
         'command.session.table' => Illuminate\Session\Console\SessionTableCommand::class,
         'command.serve' => Illuminate\Foundation\Console\ServeCommand::class,
@@ -225,6 +226,7 @@ namespace PHPSTORM_META {
         'command.queue.failed-table' => Illuminate\Queue\Console\FailedTableCommand::class,
         'command.queue.table' => Illuminate\Queue\Console\TableCommand::class,
         'command.request.make' => Illuminate\Foundation\Console\RequestMakeCommand::class,
+        'command.rule.make' => Illuminate\Foundation\Console\RuleMakeCommand::class,
         'command.seeder.make' => Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
         'command.session.table' => Illuminate\Session\Console\SessionTableCommand::class,
         'command.serve' => Illuminate\Foundation\Console\ServeCommand::class,
@@ -349,6 +351,7 @@ namespace PHPSTORM_META {
         'command.queue.failed-table' => Illuminate\Queue\Console\FailedTableCommand::class,
         'command.queue.table' => Illuminate\Queue\Console\TableCommand::class,
         'command.request.make' => Illuminate\Foundation\Console\RequestMakeCommand::class,
+        'command.rule.make' => Illuminate\Foundation\Console\RuleMakeCommand::class,
         'command.seeder.make' => Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
         'command.session.table' => Illuminate\Session\Console\SessionTableCommand::class,
         'command.serve' => Illuminate\Foundation\Console\ServeCommand::class,
@@ -473,6 +476,7 @@ namespace PHPSTORM_META {
         'command.queue.failed-table' => Illuminate\Queue\Console\FailedTableCommand::class,
         'command.queue.table' => Illuminate\Queue\Console\TableCommand::class,
         'command.request.make' => Illuminate\Foundation\Console\RequestMakeCommand::class,
+        'command.rule.make' => Illuminate\Foundation\Console\RuleMakeCommand::class,
         'command.seeder.make' => Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
         'command.session.table' => Illuminate\Session\Console\SessionTableCommand::class,
         'command.serve' => Illuminate\Foundation\Console\ServeCommand::class,
@@ -597,6 +601,7 @@ namespace PHPSTORM_META {
         'command.queue.failed-table' => Illuminate\Queue\Console\FailedTableCommand::class,
         'command.queue.table' => Illuminate\Queue\Console\TableCommand::class,
         'command.request.make' => Illuminate\Foundation\Console\RequestMakeCommand::class,
+        'command.rule.make' => Illuminate\Foundation\Console\RuleMakeCommand::class,
         'command.seeder.make' => Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
         'command.session.table' => Illuminate\Session\Console\SessionTableCommand::class,
         'command.serve' => Illuminate\Foundation\Console\ServeCommand::class,
@@ -721,6 +726,7 @@ namespace PHPSTORM_META {
         'command.queue.failed-table' => Illuminate\Queue\Console\FailedTableCommand::class,
         'command.queue.table' => Illuminate\Queue\Console\TableCommand::class,
         'command.request.make' => Illuminate\Foundation\Console\RequestMakeCommand::class,
+        'command.rule.make' => Illuminate\Foundation\Console\RuleMakeCommand::class,
         'command.seeder.make' => Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
         'command.session.table' => Illuminate\Session\Console\SessionTableCommand::class,
         'command.serve' => Illuminate\Foundation\Console\ServeCommand::class,
@@ -845,6 +851,7 @@ namespace PHPSTORM_META {
         'command.queue.failed-table' => Illuminate\Queue\Console\FailedTableCommand::class,
         'command.queue.table' => Illuminate\Queue\Console\TableCommand::class,
         'command.request.make' => Illuminate\Foundation\Console\RequestMakeCommand::class,
+        'command.rule.make' => Illuminate\Foundation\Console\RuleMakeCommand::class,
         'command.seeder.make' => Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
         'command.session.table' => Illuminate\Session\Console\SessionTableCommand::class,
         'command.serve' => Illuminate\Foundation\Console\ServeCommand::class,

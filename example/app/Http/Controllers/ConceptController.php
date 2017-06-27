@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Concept;
+use App\Category;
 use Illuminate\Http\Request;
 
 class ConceptController extends Controller
@@ -63,5 +64,56 @@ class ConceptController extends Controller
 		}
 
 		return view('welcome', compact('concepts'));
+	}
+
+	public function edit(int $id) {
+		$concept = Concept::findOrFail($id);
+		$data['concept'] = Concept::findOrFail($id);
+		$data['categories'] = Category::all();
+		$data['categoryIds'] = array();
+
+		foreach($data['concept']->categories as $category) { 
+			$data['categoryIds'][] = $category->id;
+		}
+
+		return view('concepts.edit', compact('data'));
+	}
+
+	public function saveEdit(Request $request) { 
+		$concept = Concept::findOrFail($request->input('id'));
+		
+		if(!empty($request->input('name'))) $concept->name = $request->input('name');
+		if(!empty($request->input('info'))) $concept->info = $request->input('info');
+
+		$concept->save();
+
+		if($request->input('categories') == null) { 
+			$concept->categories()->detach();
+			return redirect('/');
+		} 
+
+		foreach($concept->categories as $category) { 
+			if(!in_array($category->id, $request->input('categories'))) {
+				$concept->categories()->detach($category->id); //Verwijder uit DB als category niet meer voorkomt in update.
+			}
+		}
+
+		$conceptCats = $concept->categories->pluck('id');
+
+		foreach($request->input('categories') as $category) {
+			if(!$conceptCats->contains($category)) {
+				$concept->categories()->attach($category);
+			}
+		}
+
+		return redirect('/');
+	}
+
+	public function delete(int $id) {
+		$concept = Concept::findOrFail($id);
+		$concept->categories()->detach();
+		$concept->delete();
+
+		return;
 	}
 }

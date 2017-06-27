@@ -1,0 +1,10 @@
+@media (min-width: 768px) {
+    .navbar { 
+        min-height: 57px;
+    }
+
+    #accordion { 
+        height: auto;
+        overflow-y: hidden;
+     }
+}

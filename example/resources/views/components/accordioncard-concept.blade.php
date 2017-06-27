@@ -3,6 +3,10 @@
         <div class="card-header" role="tab" id="heading{{$concept->id}}">
             <div class="float-right">
                 <a tabindex="{{ $concept->id }}" class="fa fa-info-circle no-link" id="popover-concept-{{$concept->id}}" aria-hidden="true" role="button" data-toggle="popover" data-container="body" data-trigger="focus" title="Last edited on" data-content="{{ $concept->updated_at }}"></a>
+                @if(Auth::check() && \app\User::hasRole(Auth::id(), 1))
+                    <a class="fa fa-pencil no-link" href="{{ action("ConceptController@edit", ['id' => $concept->id]) }}" data-toggle="popover" title="Bewerken" data-content="Begrip Bewerken"></a>
+                    <a class="fa fa-remove no-link toggle-removal" data-id="{{ $concept->id }}" data-toggle="modal" data-target="#removeModal" title="Verwijderen" data-content="Begrip Verwijderen"></a>
+                @endif
             </div>
 
             <h5 class="mb-0">

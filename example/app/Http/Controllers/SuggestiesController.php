@@ -9,6 +9,7 @@ use App\Concept;
 use App\Category;
 use App\Mail\Denied;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ConceptController;
 
 class SuggestiesController extends Controller
 {
@@ -34,7 +35,7 @@ class SuggestiesController extends Controller
     public function post(Request $request) { 
         $suggestion = Suggestion::where('id', '=', $request->input('id'))->first();
 
-        $viewSuggestion = action('ConceptController@index', ["query" => $suggestion->name]); //Haal URL op voor nieuwe begrip
+        $viewSuggestion = action('ConceptController@ajax', ["query" => $suggestion->name]); //Haal URL op voor nieuwe begrip
     
         $concept = new Concept();
         $concept->name = $suggestion->name;
