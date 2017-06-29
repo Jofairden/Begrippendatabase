@@ -60,12 +60,15 @@
             </div>
         </div>
 
-        <div class="form-group-row">
-            <label for="email" class="col-2 col-form-label">Je E-mail</label>
-            <div class="col-10">
-                <input class="form-control" type="email" name="email" required>
+
+        @if(!Auth::check() || !\app\User::hasRole(Auth::id(), 1)) 
+            <div class="form-group-row">
+                <label for="email" class="col-2 col-form-label">Je E-mail</label>
+                <div class="col-10">   
+                    <input class="form-control" type="email" name="email" required>                          
+                </div>
             </div>
-        </div>
+        @endif
 
         <div class="form-group-row">
             <div class="col-10">

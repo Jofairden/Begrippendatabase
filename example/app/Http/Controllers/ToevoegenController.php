@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Category;
 use App\Mail\Suggested;
 use DB;
+use App\Concept;
+use App\User;
 
 class ToevoegenController extends Controller
 {
@@ -22,6 +25,17 @@ class ToevoegenController extends Controller
         $info = $request->input('omschrijving');
         $email = $request->input('email');
         $categories = $request->input('categories');   
+
+        if(Auth::check() && User::hasRole(Auth::id(), 1)) {
+            $concept = new Concept();
+            $concept->name = $name;
+            $concept->info = $info;
+            $concept->save();
+
+            $concept->categories()->attach($request->input('categories'));
+
+            return redirect('/');
+        }
 
         DB::table('suggested')->insert(
             [

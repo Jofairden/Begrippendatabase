@@ -23,8 +23,8 @@ class Education extends Model
 	protected $table = 'educations';
 	public $timestamps = false;
 
-	public function categories()
+	public function concepts()
 	{
-		return $this->belongsToMany(Category::class);
+		return $this->belongsToMany(Concept::class);
 	}
 }

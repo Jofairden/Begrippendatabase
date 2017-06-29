@@ -44,11 +44,6 @@ class Category extends Model
 		return $this->belongsToMany(Concept::class);
 	}
 
-	public function educations()
-	{
-		return $this->belongsToMany(Education::class);
-	}
-
 	public static function multiRelationCount(Category $category)
 	{
 		return \DB::table('category_concept')

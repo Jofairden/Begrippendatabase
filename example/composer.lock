@@ -936,12 +936,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ed136ca57e6fe5efba34e1315ea31bbf0e22de96"
+                "reference": "d95a54d168f8acc9f8744c72b55acc6f5b0910d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ed136ca57e6fe5efba34e1315ea31bbf0e22de96",
-                "reference": "ed136ca57e6fe5efba34e1315ea31bbf0e22de96",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d95a54d168f8acc9f8744c72b55acc6f5b0910d5",
+                "reference": "d95a54d168f8acc9f8744c72b55acc6f5b0910d5",
                 "shasum": ""
             },
             "require": {
@@ -1058,7 +1058,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-06-26T15:56:11+00:00"
+            "time": "2017-06-28T18:26:00+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1383,16 +1383,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v3.0.5",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "2b9e2f71b722f7c53918ab0c25f7646c2013f17d"
+                "reference": "0808939f81c1347a3c8a82a5925385a08074b0f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/2b9e2f71b722f7c53918ab0c25f7646c2013f17d",
-                "reference": "2b9e2f71b722f7c53918ab0c25f7646c2013f17d",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/0808939f81c1347a3c8a82a5925385a08074b0f1",
+                "reference": "0808939f81c1347a3c8a82a5925385a08074b0f1",
                 "shasum": ""
             },
             "require": {
@@ -1430,7 +1430,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2017-03-05T18:23:57+00:00"
+            "time": "2017-06-28T20:53:48+00:00"
         },
         {
             "name": "paragonie/random_compat",

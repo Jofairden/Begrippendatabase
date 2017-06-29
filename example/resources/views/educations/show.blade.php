@@ -5,10 +5,10 @@
     <h1>{{$education->name}}</h1>
     <hr>
     @component('components.accordion')
-            @foreach($education->categories as $category)
-                @component('components.categories.category')
-                    @slot('category', $category)
-                @endcomponent
+            @foreach($education->concepts as $concept)
+                    @component('components.accordioncard-concept',
+                        ['concept' => $concept])
+                    @endcomponent
             @endforeach
     @endcomponent
 @endsection

@@ -43,6 +43,11 @@ class Concept extends Model
 		return $this->belongsToMany(Category::class);
 	}
 
+	public function educations()
+	{
+		return $this->belongsToMany(Education::class);
+	}
+
 	public function notesFromUser($user_id)
 	{
 		return Note::fromUser($user_id, $this->id);

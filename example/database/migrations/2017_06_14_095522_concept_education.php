@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CategoryEducation extends Migration
+class ConceptEducation extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CategoryEducation extends Migration
      */
     public function up()
     {
-	    Schema::create('category_education', function (Blueprint $table) {
-		    $table->integer('category_id')->unsigned();
-		    $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+	    Schema::create('concept_education', function (Blueprint $table) {
+		    $table->integer('concept_id')->unsigned();
+		    $table->foreign('concept_id')->references('id')->on('concepts')->onDelete('cascade');
 		    $table->integer('education_id')->unsigned();
 		    $table->foreign('education_id')->references('id')->on('educations')->onDelete('cascade');
-		    $table->primary(['category_id', 'education_id']);
+		    $table->primary(['concept_id', 'education_id']);
 	    });
     }
 
@@ -29,6 +29,6 @@ class CategoryEducation extends Migration
      */
     public function down()
     {
-	    Schema::dropIfExists('category_education');
+	    Schema::dropIfExists('concept_education');
     }
 }

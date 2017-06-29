@@ -52,33 +52,4 @@ class CategoryController extends Controller
 		return view('categories.show', compact('category'));
 	}
 
-	public static function multipleRelations(Category $category)
-	{
-		//\DB::enableQueryLog();
-
-		$diff1 = self::relationCount($category);
-
-		$diff2 = self::multiRelationCount($category);
-
-		//dd($diff2->occurences);
-		//dd(\DB::getQueryLog());
-
-		dd($diff1 -  $diff2);
-
-//			'select (select  from category_concept
-//where category_id=' . $category->id . ')
-//-
-//(select count(*)
-//from category_concept
-//where category_id=' . $category->id . '
-//and concept_id in
-//(
-//    select concept_id
-//    from category_concept
-//    where category_id != ' . $category->id . '
-//)
-//order by concept_id)
-//as difference')
-	}
-
 }

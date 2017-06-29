@@ -7,4 +7,10 @@
         height: auto;
         overflow-y: hidden;
      }
+
+    
+}
+
+.card-header h5 a { 
+    text-transform: capitalize
 }

@@ -36,15 +36,20 @@
 
             var id = null;
 
-            $('.toggle-removal').click(function() { 
+            // $('.toggle-removal').click(function() { 
+            //     id = $(this).attr('data-id');
+            //     console.log(id);
+            // });
+
+            $('body').on('click', '.toggle-removal', function() {
                 id = $(this).attr('data-id');
                 console.log(id);
             });
 
-            $('.remove-begrip').click(function(){
+            $('body').on('click', '.remove-begrip', function() {
                 var url = window.location.origin + '/concepts/delete/' + id;
                 $.ajax({
-                    url: window.location.origin + '/concepts/delete/' + id,
+                    url: url,
                     type: 'DELETE',
                     data: { '_token' : window.Laravel.csrfToken },
                     success: function(response) { 

@@ -22,10 +22,17 @@
                     @slot('text', 'API')
                     @slot('link', route('api.index'))
                 @endcomponent
-                @component('components.nav.nav-item')
-                    @slot('text', 'Begrip toevoegen')
-                    @slot('link', route('toevoegen.index'))
-                @endcomponent
+                @if(Auth::check() && \app\User::hasRole(Auth::id(), 1))
+                    @component('components.nav.nav-item')
+                        @slot('text', 'Begrip toevoegen')
+                        @slot('link', route('toevoegen.index'))
+                    @endcomponent
+                @else
+                    @component('components.nav.nav-item')
+                        @slot('text', 'Suggestie toevoegen')
+                        @slot('link', route('toevoegen.index'))
+                    @endcomponent
+                @endif
                 @component('components.nav.nav-account',
                 [
                     'text'      => Auth::check() ? Auth::user()->name : 'Account',
